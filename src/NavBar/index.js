@@ -29,16 +29,13 @@ export default class Example extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
+        <Navbar style={{height: '40px'}}  color="light" light expand="md">
           <NavbarBrand href="/">grocery list</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/"> Create </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Lists</NavLink>
+                <NavLink href="/create" style={{fontSize: '1.5em'}}> + </NavLink>
               </NavItem>
             </Nav>
           </Collapse>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NavBar from '../NavBar';
 
 class LandingPage extends Component {
   constructor() {
@@ -8,6 +9,8 @@ class LandingPage extends Component {
   render() {
     return(
       <div>
+        <NavBar />
+
       </div>
     )
   }

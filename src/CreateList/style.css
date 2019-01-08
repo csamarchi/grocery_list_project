@@ -1,0 +1,22 @@
+.background {
+  background-color: rgba(243,249,251,.5);
+}
+
+h1 {
+  color: black;
+  font-size: 1em;
+}
+
+.categoryWrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.category {
+  border: 2px solid black;
+  height: 270px;
+  width: 250px;
+  padding: 10px;
+  margin: 10px;
+}
