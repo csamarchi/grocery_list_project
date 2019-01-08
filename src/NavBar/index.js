@@ -37,6 +37,9 @@ export default class Example extends React.Component {
               <NavItem>
                 <NavLink href="/create" style={{fontSize: '1.5em'}}> + </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink href="/landing" style={{fontSize: '1em', marginTop: '8px'}}> Your Lists </NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
