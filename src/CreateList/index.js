@@ -1,51 +1,70 @@
 import React, {Component} from 'react';
 import NavBar from '../NavBar';
 import './style.css';
+import List from '../List';
 
 class CreateList extends Component {
   constructor() {
     super();
+    this.state = {
+      name: '',
+      list: false,
+      form: true,
+    }
   }
 
+  handleChange = (e) => {
+    this.setState({[e.currentTarget.name]: e.currentTarget.value});
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(this.state, 'worked');
+
+    try {
+      const addedList = await fetch('http://localhost:9000/create', {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(this.state),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(addedList)
+
+      const parsedResponse = await addedList.json();
+      console.log(parsedResponse, 'this is our parsed data at login');
+
+      this.setState({
+        createdPostId: parsedResponse.data,
+        list: true
+      })
+      this.props.history.push('/'+ this.state.createdPostId)
+
+    } catch (err) {
+      console.log(err);
+      console.log('error');
+    }
+  }
+
+
   render() {
+
     return(
       <div className='background'>
         <NavBar />
-
-
-        <div className='categoryWrapper'>
-            <div className='category'>
-              <h1> Produce </h1>
+        {this.state.list ? <List data={this.state.createdPostId} name={this.state.name} /> : null}
+          <div className='wrapper'>
+            <div className='createForm'>
+              <form onSubmit={this.handleSubmit}>
+                <label className="username">
+                  Name your list:
+                  <input type='text' name='name' placeholder='type something..' onChange={this.handleChange}/>
+                </label> <br/>
+                  <input type='Submit' value='Create' />
+              </form>
             </div>
-            <div className='category'>
-              <h1> Meats </h1>
-            </div>
-            <div className='category'>
-              <h1> Deli </h1>
-            </div>
-            <div className='category'>
-              <h1> Dairy </h1>
-            </div>
-            <div className='category'>
-              <h1> Bakery </h1>
-            </div>
-            <div className='category'>
-              <h1> Frozen </h1>
-            </div>
-            <div className='category'>
-              <h1> Dry Goods </h1>
-            </div>
-            <div className='category'>
-              <h1> Drinks </h1>
-            </div>
-            <div className='category'>
-              <h1> Alcohol </h1>
-            </div>
-            <div className='category'>
-              <h1> General </h1>
-            </div>
-        </div>
-
+          </div>
       </div>
     )
   }

@@ -7,6 +7,7 @@ import Login from './Login';
 import Register from './Register';
 import LandingPage from './LandingPage';
 import CreateList from './CreateList';
+import ShowPage from './ShowPage';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
            <Route exact path="/register" component={Register} />
            <Route exact path="/landing" component={LandingPage} />
            <Route exact path="/create" component={CreateList} />
+           <Route path="/:id" component={ShowPage} />
          </Switch>
       </div>
     );

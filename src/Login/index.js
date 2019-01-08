@@ -28,7 +28,7 @@ class Login extends Component {
       console.log(parsedResponse, 'this is our parsed data at login');
 
         if(parsedResponse.data === 'login successful') {
-          this.props.history.push('/landing');
+          this.props.history.push('/create');
 
         } else if(parsedResponse.data === 'login unsuccessful'){
           alert('Password Incorrect')
@@ -59,7 +59,7 @@ class Login extends Component {
                   Password:
                   <input type='password' name='password' placeholder='password' onChange={this.handleChange}/>
                 </label>
-                  <input className="registerButton" type='Submit' value='Login'/>
+                  <input type='Submit' value='Login'/>
               </Form>
               <h2> or </h2>
               <Link to ='/register'> <h2 className='registerText'> register </h2> </Link>

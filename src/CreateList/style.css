@@ -7,16 +7,14 @@ h1 {
   font-size: 1em;
 }
 
-.categoryWrapper {
+.wrapper {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.category {
-  border: 2px solid black;
-  height: 270px;
-  width: 250px;
-  padding: 10px;
-  margin: 10px;
+.createForm {
+  padding: 80px;
+  margin: 10%;
+  background-color: #db5555;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
