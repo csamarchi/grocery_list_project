@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './NavBar';
 import { Route, Link, Switch } from 'react-router-dom';
 import Login from './Login';
+import Register from './Register';
 import LandingPage from './LandingPage';
 import CreateList from './CreateList';
 
@@ -13,6 +14,7 @@ class App extends Component {
       <div>
           <Switch>
            <Route exact path="/" component={Login} />
+           <Route exact path="/register" component={Register} />
            <Route exact path="/landing" component={LandingPage} />
            <Route exact path="/create" component={CreateList} />
          </Switch>
