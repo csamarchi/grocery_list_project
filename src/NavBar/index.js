@@ -1,40 +1,49 @@
-import React, {Component} from 'react';
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import React from 'react';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
-class NavBar extends Component {
-  constructor() {
-    super();
+export default class Example extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
   }
-
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
   render() {
-    return(
+    return (
       <div>
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#home">React-Bootstrap</a>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-          <NavItem eventKey={1} href="#">
-            Link
-          </NavItem>
-          <NavItem eventKey={2} href="#">
-            Link
-          </NavItem>
-          <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-            <MenuItem eventKey={3.1}>Action</MenuItem>
-            <MenuItem eventKey={3.2}>Another action</MenuItem>
-            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.4}>Separated link</MenuItem>
-          </NavDropdown>
-        </Nav>
-      </Navbar>
-          <h1> Nav Bar </h1>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">grocery list</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/components/"> Create </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="https://github.com/reactstrap/reactstrap">Lists</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
       </div>
-    )
+    );
   }
 }
-
-export default NavBar;
