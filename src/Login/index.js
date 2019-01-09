@@ -49,19 +49,14 @@ class Login extends Component {
         <NavBar />
           <div className='wrapper'>
             <div className='loginForm'>
-              <h1> Sign in </h1>
+              <h1 className='groceryLogo'> groceryList </h1>
               <Form onSubmit={this.handleSubmit}>
-                <label className="username">
-                  Username:
                   <input type='text' name='username' placeholder='username' onChange={this.handleChange}/>
-                </label> <br/>
-                <label className="password">
-                  Password:
+                 <br/>
                   <input type='password' name='password' placeholder='password' onChange={this.handleChange}/>
-                </label>
-                  <input type='Submit' value='Login'/>
+                  <br/><input className='loginButton'type='Submit' value='Log in'/>
               </Form>
-              <h2> or </h2>
+              <h1 className='signInText'> ----------- or ----------- </h1>
               <Link to ='/register'> <h2 className='registerText'> register </h2> </Link>
             </div>
           </div>

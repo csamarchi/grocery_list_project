@@ -1,0 +1,12 @@
+.gridList {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+.listDiv {
+  padding: 50px;
+  border: 1px solid;
+  margin: 5px;
+}
