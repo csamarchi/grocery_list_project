@@ -11,7 +11,13 @@ class LandingPage extends Component {
   }
 
   getList = async () => {
-    const list = await fetch('http://localhost:9000/findLists');
+    const list = await fetch('http://localhost:9000/findLists', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     console.log(list, 'MKMK');
     const listParsedJSON = await list.json();
       return listParsedJSON
