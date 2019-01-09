@@ -18,7 +18,7 @@ class LandingPage extends Component {
         'Content-Type': 'application/json'
       }
     });
-    console.log(list, 'MKMK');
+
     const listParsedJSON = await list.json();
       return listParsedJSON
   }
