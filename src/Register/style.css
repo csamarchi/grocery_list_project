@@ -1,0 +1,29 @@
+.loginForm {
+  padding: 80px;
+  margin: 10%;
+  background-color: #db5555;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.register {
+  text-align: center;
+  color: white;
+  font-size: 1.5em;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+.registerButton {
+  background-color: #db5555;
+}
+
+.registerButton:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #db5555;
+}

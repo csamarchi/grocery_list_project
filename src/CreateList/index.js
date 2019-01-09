@@ -57,11 +57,10 @@ class CreateList extends Component {
           <div className='wrapper'>
             <div className='createForm'>
               <form onSubmit={this.handleSubmit}>
-                <label className="username">
-                  Name your list:
+                  <h1 className='nameListText'>Name your list: </h1>
                   <input type='text' name='name' placeholder='type something..' onChange={this.handleChange}/>
-                </label> <br/>
-                  <input type='Submit' value='Create' />
+                <br/>
+                  <input className='createButton'type='Submit' value='Create' />
               </form>
             </div>
           </div>

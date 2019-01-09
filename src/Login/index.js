@@ -56,7 +56,7 @@ class Login extends Component {
                   <input type='password' name='password' placeholder='password' onChange={this.handleChange}/>
                   <br/><input className='loginButton'type='Submit' value='Log in'/>
               </Form>
-              <h1 className='signInText'> ----------- or ----------- </h1>
+              <h1 className='signInText'> ────── or ────── </h1>
               <Link to ='/register'> <h2 className='registerText'> register </h2> </Link>
             </div>
           </div>
