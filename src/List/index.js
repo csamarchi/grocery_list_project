@@ -63,12 +63,7 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.props.data._id, 'COFFEEE')
-    const showItem = this.state.list.map((item, i) => {
-      return (
-        <h2> item.name </h2>
-      )
-    })
+
 
     return(
       <div className='background'>
@@ -92,7 +87,7 @@ class List extends Component {
           <div className='categoryWrapper'>
               <div className='category'>
                 <h1> Produce </h1>
-                  {showItem}
+            
               </div>
               <div className='category'>
                 <h1> Meats </h1>
@@ -128,3 +123,12 @@ class List extends Component {
 }
 
 export default List;
+
+
+
+// console.log(this.props.data._id, 'COFFEEE')
+// const showItem = this.state.list.map((item, i) => {
+//   return (
+//     <h2> item.name </h2>
+//   )
+// })
