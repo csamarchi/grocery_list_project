@@ -10,13 +10,14 @@ class List extends Component {
       category: '',
       name: '',
       _id: this.props.data._id,
-      list: []
+      list: [],
     }
   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      this.componentDidMount()
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
@@ -25,6 +26,7 @@ class List extends Component {
           'Content-Type': 'application/json'
         }
       })
+
     } catch(err) {
       console.log(err);
     }
@@ -54,8 +56,9 @@ class List extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-      console.log(list);
+
       this.setState({list: list.data})
+
 
     }).catch((err) => {
       console.log(err);
@@ -63,16 +66,15 @@ class List extends Component {
   }
 
   render() {
-    // console.log(this.props.data._id, 'COFFEEE')
-    // const showItem = this.state.list.map((item, i) => {
-    //   return (
-    //     <h2> item.name </h2>
-    //   )
-    // })
+
+
 
     return(
       <div className='background'>
+
+
           <h1> {this.props.data.name} </h1>
+
           <form onSubmit={this.handleSubmit}>
             <input type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
             <select name='category' onChange={this.handleChange}>
@@ -89,10 +91,12 @@ class List extends Component {
             </select>
             <input type='Submit' value='+'/>
           </form>
+
+
+
           <div className='categoryWrapper'>
               <div className='category'>
                 <h1> Produce </h1>
-    
               </div>
               <div className='category'>
                 <h1> Meats </h1>
@@ -111,6 +115,8 @@ class List extends Component {
               </div>
               <div className='category'>
                 <h1> Dry Goods </h1>
+                {console.log(this.state.list, 'HELLO LIST')}
+                {this.state.list.dryGoods ?  this.state.list.dryGoods.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Drinks </h1>
@@ -122,9 +128,20 @@ class List extends Component {
                 <h1> General </h1>
               </div>
           </div>
+
+
       </div>
     )
   }
 }
 
 export default List;
+
+
+
+// console.log(this.props.data._id, 'COFFEEE')
+// const showItem = this.state.list.map((item, i) => {
+//   return (
+//     <h2> item.name </h2>
+//   )
+// })
