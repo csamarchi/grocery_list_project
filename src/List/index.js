@@ -17,7 +17,7 @@ class List extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      this.componentDidMount()
+      this.componentDidMount();
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
@@ -97,35 +97,43 @@ class List extends Component {
           <div className='categoryWrapper'>
               <div className='category'>
                 <h1> Produce </h1>
+                {this.state.list.produce ?  this.state.list.produce.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Meats </h1>
+                {this.state.list.meats ?  this.state.list.meats.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Deli </h1>
+                {this.state.list.deli ?  this.state.list.deli.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Dairy </h1>
+                {this.state.list.dairy ?  this.state.list.dairy.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Bakery </h1>
+                {this.state.list.bakery ?  this.state.list.bakery.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Frozen </h1>
+                {this.state.list.frozen ?  this.state.list.frozen.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Dry Goods </h1>
-                {console.log(this.state.list, 'HELLO LIST')}
                 {this.state.list.dryGoods ?  this.state.list.dryGoods.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Drinks </h1>
+                {this.state.list.drinks ?  this.state.list.drinks.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> Alcohol </h1>
+                {this.state.list.alcohol ?  this.state.list.alcohol.map((item) => <p>{item}</p>) : null}
               </div>
               <div className='category'>
                 <h1> General </h1>
+                {this.state.list.general ?  this.state.list.general.map((item) => <p>{item}</p>) : null}
               </div>
           </div>
 
