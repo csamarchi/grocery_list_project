@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import NavBar from '../NavBar';
 import './style.css';
+import { Route, Link, Switch } from 'react-router-dom';
+
 
 class DisplayLists extends Component {
   constructor() {
@@ -15,6 +17,9 @@ class DisplayLists extends Component {
       return (
         <div key={item._id} className='listDiv'>
           <h4> {item.name} </h4>
+          <Link to ={'/' + item._id}>
+          <button>View</button>
+          </Link>
         </div>
       )
     })
