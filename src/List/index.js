@@ -17,7 +17,6 @@ class List extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
@@ -25,7 +24,7 @@ class List extends Component {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
+      });
 
     } catch(err) {
       console.log(err);
@@ -93,7 +92,7 @@ class List extends Component {
         }
       }
       this.setState({
-        count: 1
+        count: 'rerender'
       })
   }
 
@@ -128,43 +127,43 @@ class List extends Component {
             <div className='categoryWrapper'>
                 <div className='category'>
                   <h1> Produce </h1>
-                  {this.state.list.produce ?  this.state.list.produce.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'produce')}>Submit</button> </div>) : null}
+                  {this.state.list.produce ?  this.state.list.produce.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'produce')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Meats </h1>
-                  {this.state.list.meats ?  this.state.list.meats.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'meats')}>Submit</button> </div>) : null}
+                  {this.state.list.meats ?  this.state.list.meats.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'meats')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Deli </h1>
-                  {this.state.list.deli ?  this.state.list.deli.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'deli')}>Submit</button> </div>) : null}
+                  {this.state.list.deli ?  this.state.list.deli.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'deli')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Dairy </h1>
-                  {this.state.list.dairy ?  this.state.list.dairy.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dairy')}>Submit</button> </div>) : null}
+                  {this.state.list.dairy ?  this.state.list.dairy.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dairy')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Bakery </h1>
-                  {this.state.list.bakery ?  this.state.list.bakery.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'bakery')}>Submit</button> </div>) : null}
+                  {this.state.list.bakery ?  this.state.list.bakery.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'bakery')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Frozen </h1>
-                  {this.state.list.frozen ?  this.state.list.frozen.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'frozen')}>Submit</button> </div>) : null}
+                  {this.state.list.frozen ?  this.state.list.frozen.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'frozen')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Dry Goods </h1>
-                  {this.state.list.dryGoods ?  this.state.list.dryGoods.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dryGoods')}>Submit</button> </div>) : null}
+                  {this.state.list.dryGoods ?  this.state.list.dryGoods.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dryGoods')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Drinks </h1>
-                  {this.state.list.drinks ?  this.state.list.drinks.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'drinks')}>Submit</button> </div>) : null}
+                  {this.state.list.drinks ?  this.state.list.drinks.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'drinks')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Alcohol </h1>
-                  {this.state.list.alcohol ?  this.state.list.alcohol.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'alcohol')}>Submit</button> </div>) : null}
+                  {this.state.list.alcohol ?  this.state.list.alcohol.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'alcohol')}>Delete</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> General </h1>
-                  {this.state.list.general ?  this.state.list.general.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'general')}>Submit</button> </div>) : null}
+                  {this.state.list.general ?  this.state.list.general.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'general')}>Delete</button> </div>) : null}
                 </div>
             </div>
       </div>
