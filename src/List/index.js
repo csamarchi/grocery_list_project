@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from '../NavBar';
 import './style.css';
+import ListCategory from './ListCategory';
 
 class List extends Component {
 
@@ -64,6 +65,8 @@ class List extends Component {
     })
   }
 
+// send a fetch request to the server to remove a list item on onClick
+// invoke removeFromState with THREE arguments
   deleteItem = async (item, id, category) => {
     console.log(item, id, category);
     const sendData = {
@@ -83,6 +86,8 @@ class List extends Component {
       }
     })
   }
+
+  // Remove list item onClick from the client side
   removeFromState = (item, id, category) => {
     for (let key in this.state.list) {
         if(key === category) {
