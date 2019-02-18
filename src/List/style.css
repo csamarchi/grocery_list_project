@@ -101,3 +101,16 @@ select::-ms-expand {
   -o-transition: .25s all ease;
   transition: .25s all ease;
 }
+
+.itemWraper {
+  display: flex;
+}
+
+.deleteButton {
+  font-size: 0.7em;
+  border-radius: 10px;
+  padding: 2px;
+  height: 20px;
+  color: red;
+  margin-left: 5px;
+}
