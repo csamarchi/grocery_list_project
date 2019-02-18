@@ -56,14 +56,36 @@ class List extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-
+      console.log(list, '124')
       this.setState({list: list.data})
-
 
     }).catch((err) => {
       console.log(err);
     })
   }
+
+handleDeleteItem = async (e) => {
+  e.preventDefault();
+  let item = e.currentTarget.item;
+  console.log(item)
+  console.log(e.currentTarget);
+  // console.log(typeof(e.currentTarget))
+  // const sendData = await {
+  //   item: e.currentTarget.item,
+  //   listID: e.currentTarget.listID,
+  //   category: e.currentTarget.category,
+  // };
+  // console.log(sendData)
+  // const deleteItem = await fetch('http://localhost:9000/deleteItem', {
+  //   method: 'POST',
+  //   credentials: 'include',
+  //   body: JSON.stringify(sendData),
+  //   headers:{
+  //     'Content-Type': 'application/json'
+  //     }
+  // });
+
+}
 
   render() {
 
@@ -96,7 +118,8 @@ class List extends Component {
             <div className='categoryWrapper'>
                 <div className='category'>
                   <h1> Produce </h1>
-                  {this.state.list.produce ?  this.state.list.produce.map((item) => <p>{item}</p>) : null}
+                  {this.state.list.produce ?  this.state.list.produce.map((item) => <div><p>{item}</p> <button listID={this.state.list._id} category={'produce'} item={item} onClick={this.handleDeleteItem}> Delete</button></div>) : null}
+
                 </div>
                 <div className='category'>
                   <h1> Meats </h1>
