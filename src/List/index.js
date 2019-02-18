@@ -16,7 +16,7 @@ class List extends Component {
   }
 
   handleSubmit = async (e) => {
-    e.preventDefault();
+
     try {
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
@@ -132,43 +132,43 @@ class List extends Component {
             <div className='categoryWrapper'>
                 <div className='category'>
                   <h1> Produce </h1>
-                  {this.state.list.produce ?  this.state.list.produce.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'produce')}>Delete</button> </div>) : null}
+                  {this.state.list.produce ?  this.state.list.produce.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'produce')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Meats </h1>
-                  {this.state.list.meats ?  this.state.list.meats.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'meats')}>Delete</button> </div>) : null}
+                  {this.state.list.meats ?  this.state.list.meats.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'meats')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Deli </h1>
-                  {this.state.list.deli ?  this.state.list.deli.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'deli')}>Delete</button> </div>) : null}
+                  {this.state.list.deli ?  this.state.list.deli.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'deli')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Dairy </h1>
-                  {this.state.list.dairy ?  this.state.list.dairy.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dairy')}>Delete</button> </div>) : null}
+                  {this.state.list.dairy ?  this.state.list.dairy.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dairy')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Bakery </h1>
-                  {this.state.list.bakery ?  this.state.list.bakery.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'bakery')}>Delete</button> </div>) : null}
+                  {this.state.list.bakery ?  this.state.list.bakery.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'bakery')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Frozen </h1>
-                  {this.state.list.frozen ?  this.state.list.frozen.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'frozen')}>Delete</button> </div>) : null}
+                  {this.state.list.frozen ?  this.state.list.frozen.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'frozen')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Dry Goods </h1>
-                  {this.state.list.dryGoods ?  this.state.list.dryGoods.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dryGoods')}>Delete</button> </div>) : null}
+                  {this.state.list.dryGoods ?  this.state.list.dryGoods.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'dryGoods')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Drinks </h1>
-                  {this.state.list.drinks ?  this.state.list.drinks.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'drinks')}>Delete</button> </div>) : null}
+                  {this.state.list.drinks ?  this.state.list.drinks.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'drinks')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> Alcohol </h1>
-                  {this.state.list.alcohol ?  this.state.list.alcohol.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'alcohol')}>Delete</button> </div>) : null}
+                  {this.state.list.alcohol ?  this.state.list.alcohol.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'alcohol')}>X</button> </div>) : null}
                 </div>
                 <div className='category'>
                   <h1> General </h1>
-                  {this.state.list.general ?  this.state.list.general.map((item) => <div> <p>{item}</p> <button item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'general')}>Delete</button> </div>) : null}
+                  {this.state.list.general ?  this.state.list.general.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'general')}>X</button> </div>) : null}
                 </div>
             </div>
       </div>
@@ -177,12 +177,3 @@ class List extends Component {
 }
 
 export default List;
-
-
-
-// console.log(this.props.data._id, 'COFFEEE')
-// const showItem = this.state.list.map((item, i) => {
-//   return (
-//     <h2> item.name </h2>
-//   )
-// })
