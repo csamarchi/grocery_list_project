@@ -31,6 +31,20 @@ class LandingPage extends Component {
     })
   }
 
+//Delete Function
+  deleteList = async (id) => {
+      console.log(id, ' this is id');
+      const deleteListResponse = await fetch('http://localhost:9000/api/v1/list/' + id, {
+          method: 'DELETE'
+        });
+      const deleteListParsed = await deleteListResponse.text();
+      console.log(deleteListParsed, 'deleted')
+      this.setState({
+        lists: this.state.lists.filter((oneList) => oneList._id !== id )
+      })
+    }
+
+
   render() {
 
 

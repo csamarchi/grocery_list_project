@@ -12,6 +12,7 @@ class DisplayLists extends Component {
 
   render() {
 
+
     const showList = this.props.lists.map((item, i) => {
       console.log(item.name);
       return (
@@ -20,6 +21,7 @@ class DisplayLists extends Component {
           <Link to ={'/' + item._id}>
           <button>View</button>
           </Link>
+          <button>Delete List</button>
         </div>
       )
     })
