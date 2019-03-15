@@ -10,7 +10,27 @@ class DisplayLists extends Component {
 
   }
 
+handleClick = async (itemID) => {
+  // e.preventDefault();
+  console.log(itemID);
+  const deleteList = await fetch('http://localhost:9000/' + itemID, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const responseList = await deleteList.json();
+await  console.log(responseList, '56789');
+  await this.setState({
+      name: 'awefawfe'
+   })
+await  this.props.history.push('/landing');
+    // this.setState({deleted: '124'})
+}
+
   render() {
+
 
 
     const showList = this.props.lists.map((item, i) => {
@@ -21,7 +41,7 @@ class DisplayLists extends Component {
           <Link to ={'/' + item._id}>
           <button>View</button>
           </Link>
-          <button>Delete List</button>
+          <button itemID={item._id} onClick={this.handleClick.bind(null, item._id)}>Delete List</button>
         </div>
       )
     })
