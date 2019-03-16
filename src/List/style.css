@@ -114,3 +114,14 @@ select::-ms-expand {
   color: red;
   margin-left: 5px;
 }
+
+.deleteButton:hover {
+  cursor: pointer;
+  background-color: #6d6f70;
+  border: #6d6f70;
+}
+
+.itemWraper:hover {
+  /* background-color: #8f9193; */
+  cursor: pointer;
+}
