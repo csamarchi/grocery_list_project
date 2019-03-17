@@ -39,6 +39,7 @@ class CreateList extends Component {
         createdPostId: parsedResponse.data,
         list: true
       })
+      console.log(this.props.history)
       this.props.history.push('/'+ this.state.createdPostId)
 
     } catch (err) {

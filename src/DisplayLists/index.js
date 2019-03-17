@@ -2,17 +2,22 @@ import React, {Component} from 'react';
 import NavBar from '../NavBar';
 import './style.css';
 import { Route, Link, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
 
 
 class DisplayLists extends Component {
   constructor() {
     super();
+    this.state = {
+      a: 'a'
+    }
 
   }
 
-handleClick = async (itemID) => {
-  // e.preventDefault();
-  console.log(itemID);
+handleClick = async (e, itemID ) => {
+  // await e.preventDefault();
+  await console.log(itemID);
   const deleteList = await fetch('http://localhost:9000/' + itemID, {
     method: 'DELETE',
     credentials: 'include',
@@ -21,13 +26,11 @@ handleClick = async (itemID) => {
     }
   });
   const responseList = await deleteList.json();
-await  console.log(responseList, '56789');
-  await this.setState({
-      name: 'awefawfe'
-   })
-await  this.props.history.push('/landing');
-    // this.setState({deleted: '124'})
+  await  console.log(responseList, '56789');
+
+   this.props.history.push('/create');
 }
+
 
   render() {
 
@@ -41,7 +44,7 @@ await  this.props.history.push('/landing');
           <Link to ={'/' + item._id}>
           <button>View</button>
           </Link>
-          <button itemID={item._id} onClick={this.handleClick.bind(null, item._id)}>Delete List</button>
+          <button itemID={item._id} onClick={e => this.handleClick(e, item._id)}>Delete List</button>
         </div>
       )
     })
@@ -57,4 +60,4 @@ await  this.props.history.push('/landing');
   }
 }
 
-export default DisplayLists;
+export default withRouter(DisplayLists);
