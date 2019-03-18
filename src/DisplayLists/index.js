@@ -42,9 +42,9 @@ handleClick = async (e, itemID ) => {
         <div key={item._id} className='listDiv'>
           <h4> {item.name} </h4>
           <Link to ={'/' + item._id}>
-          <button>View</button>
+          <button className='deleteListButton'>View</button>
           </Link>
-          <button itemID={item._id} onClick={e => this.handleClick(e, item._id)}>Delete List</button>
+          <button className='deleteListButton' itemID={item._id} onClick={e => this.handleClick(e, item._id)}>Delete List</button>
         </div>
       )
     })

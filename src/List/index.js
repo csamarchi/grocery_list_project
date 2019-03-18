@@ -132,7 +132,9 @@ class List extends Component {
             <div className='categoryWrapper'>
                 <div className='category'>
                   <h1> Produce </h1>
+
                   {this.state.list.produce ?  this.state.list.produce.map((item) => <div className="itemWraper"> <p>{item}</p> <button className='deleteButton' item={item} id={this.state._id} onClick={() => this.deleteItem(item, this.state._id, 'produce')}>X</button> </div>) : null}
+
                 </div>
                 <div className='category'>
                   <h1> Meats </h1>
