@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from '../NavBar';
 import './style.css';
-import {Form, Input} from 'reactstrap';
+import { Form } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class Login extends Component {
@@ -54,7 +54,7 @@ class Login extends Component {
                   <input type='text' name='username' placeholder='username' onChange={this.handleChange}/>
                  <br/>
                   <input type='password' name='password' placeholder='password' onChange={this.handleChange}/>
-                  <br/><input className='loginButton'type='Submit' value='Log in'/>
+                  <br/><input className='loginButton'type='Submit' />
               </Form>
               <h1 className='signInText'> ────── or ────── </h1>
               <Link to ='/register'> <h2 className='registerText'> register </h2> </Link>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import NavBar from '../NavBar';
 import './style.css';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 

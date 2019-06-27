@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import CreateList from '../CreateList';
 import NavBar from '../NavBar';
 import List from '../List';
 

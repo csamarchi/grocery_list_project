@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from '../NavBar';
-import {Form, Input} from 'reactstrap';
+import { Form } from 'reactstrap';
 import './style.css';
 
 class Register extends Component {
@@ -46,7 +46,7 @@ handleChange = (e) => {
                 <input type='text' name='fullName' placeholder='full name' onChange={this.handleChange}/> <br/>
                 <input type='text' name='username' placeholder='username' onChange={this.handleChange}/><br/>
                 <input type='password' name='password' placeholder='password' onChange={this.handleChange}/>
-                <input className="registerButton" type='Submit' value='register'/>
+                <input className="registerButton" type='Submit' />
               </Form>
           </div>
         </div>
