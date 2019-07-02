@@ -52,7 +52,7 @@ class LandingPage extends Component {
     return(
       <div>
         <NavBar />
-        <DisplayLists lists={this.state.lists}/>
+        <DisplayLists lists={this.state.lists} />
       </div>
     )
   }

@@ -58,7 +58,9 @@ class List extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-      this.setState({list: list.data})
+      console.log(list, 'waef')
+      this.setState({list: list.data,
+                    background: list.data.color})
     }).catch((err) => {
       console.log(err);
     })
@@ -97,7 +99,6 @@ class List extends Component {
   handleChangeComplete = (color) => {
     this.setState({
       background: color.hex,
-      color: color.hex
      });
      console.log(this.state.color);
   };
@@ -111,9 +112,12 @@ class List extends Component {
   };
 
   handleUpdate = async () => {
-    const data = {color: 'hex'};
+    const data = {
+      color: this.state.background,
+      listID: this.state._id
+    };
 
-    const updateColor = await fetch('http://localhost:9000/listColor', {
+    const updateColor = await fetch('http://localhost:9000/listcolor', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(data),
