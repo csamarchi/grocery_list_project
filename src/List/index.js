@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './style.css';
 import ListCategory from './ListCategory';
+import { CirclePicker } from 'react-color';
 
 class List extends Component {
 
@@ -11,6 +12,8 @@ class List extends Component {
       name: '',
       _id: this.props.data._id,
       list: [],
+      background: 'rgba(243,249,251,.5)',
+      displayColorPicker: false
     }
   }
 
@@ -25,6 +28,7 @@ class List extends Component {
           'Content-Type': 'application/json'
         }
       });
+      this.setState({list: data})
     } catch(err) {
       console.log(err);
     }
@@ -53,7 +57,6 @@ class List extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     this.getList().then((list) => {
       this.setState({list: list.data})
     }).catch((err) => {
@@ -64,7 +67,6 @@ class List extends Component {
 // send a fetch request to the server to remove a list item on onClick
 // invoke removeFromState with THREE arguments
   deleteItem = async (item, id, category) => {
-    console.log(item, id, category);
     const sendData = {
       item: item,
       id: id,
@@ -83,13 +85,35 @@ class List extends Component {
     })
   }
 
+  // addToState = (item, category) => {
+  //   console.log(item, category);
+  //   for (let key in this.state.list) {
+  //     if (key === category) {
+  //       this.state.lis[key].push(item)
+  //     }
+  //   }
+  // }
+
+  handleChangeComplete = (color) => {
+    this.setState({ background: color.hex });
+  };
+
+  handleClick = () => {
+  this.setState({ displayColorPicker: !this.state.displayColorPicker })
+};
+
+  handleClose =() => {
+    this.setState({ displayColorPicker: false })
+  };
+
+
   // Remove list item onClick from the client side
   removeFromState = (item, id, category) => {
+    //console.log(item, id, category);
     for (let key in this.state.list) {
         if(key === category) {
           let index = this.state.list[key].indexOf(item);
           this.state.list[key].splice(index, 1);
-          console.log(this.state.list.meats);
         }
       }
       this.setState({
@@ -98,7 +122,7 @@ class List extends Component {
   }
 
   render() {
-    console.log('render');
+    console.log(this.state);
     let data = this.state.list
     let categoryList = Object.keys(data).splice(0, 9).map((item) =>
           <div className='category' key={item}>
@@ -118,18 +142,29 @@ class List extends Component {
     )
 
     return(
-      <div className='background'>
+      <div className='background' style={{background: this.state.background}}>
           <h1 className='listName'> {this.props.data.name} </h1>
+          <div className='colorWrapper'>
+            <div className='swatch' onClick={ this.handleClick }>
+              <h1> Change background </h1>
+              <div className='color' style={{background: this.state.background}} />
+            </div>
+            { this.state.displayColorPicker ?
+              <div className='popover'>
+                <div className='cover' onClick={ this.handleClose }/>
+                  <CirclePicker color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+                </div> : null }
+          </div>
           <div className='wrapper'>
             <form>
-              <input className='addItemInput'type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
+              <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
               <div className="select">
                 <select name='category' onChange={this.handleChange}>
                   <option> Choose a category </option>
                     {category}
                 </select>
               </div>
-              <button onClick={this.handleSubmit} className='addItemButton' type='Submit'> + </button>
+              <button onClick={this.handleSubmit} className='addItemButton'> + </button>
             </form>
           </div>
           <div className='categoryWrapper'>

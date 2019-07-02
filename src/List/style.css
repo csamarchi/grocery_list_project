@@ -138,3 +138,40 @@ p {
   display: flex;
   flex-direction: column;
 }
+
+.popover {
+  position: inherit;
+  z-Index: 2;
+}
+
+.cover {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.color {
+  width: 36px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+.swatch {
+  padding: 5px;
+  background: #f8f9fa;
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+  display: inline-block;
+  cursor: pointer;
+}
+
+.colorWrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+h1 {
+  font-family: "Courier New", Courier, monospace;
+}
