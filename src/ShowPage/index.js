@@ -29,7 +29,7 @@ class ShowPage extends Component {
 
 
   render() {
-    console.log(this.props.match.url, 'CHEKCIT');
+    //console.log(this.props.match.url, 'CHEKCIT');
     return(
       <div className='background'>
         <NavBar />

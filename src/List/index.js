@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './style.css';
-import ListCategory from './ListCategory';
 import { CirclePicker } from 'react-color';
 
 class List extends Component {
@@ -13,7 +12,8 @@ class List extends Component {
       _id: this.props.data._id,
       list: [],
       background: 'rgba(243,249,251,.5)',
-      displayColorPicker: false
+      displayColorPicker: false,
+      color: ''
     }
   }
 
@@ -95,16 +95,33 @@ class List extends Component {
   // }
 
   handleChangeComplete = (color) => {
-    this.setState({ background: color.hex });
+    this.setState({
+      background: color.hex,
+      color: color.hex
+     });
+     console.log(this.state.color);
   };
 
   handleClick = () => {
   this.setState({ displayColorPicker: !this.state.displayColorPicker })
 };
 
-  handleClose =() => {
+  handleClose = () => {
     this.setState({ displayColorPicker: false })
   };
+
+  handleUpdate = async () => {
+    const data = {color: 'hex'};
+
+    const updateColor = await fetch('http://localhost:9000/listColor', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  }
 
 
   // Remove list item onClick from the client side
@@ -122,11 +139,11 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state.color);
     let data = this.state.list
     let categoryList = Object.keys(data).splice(0, 9).map((item) =>
           <div className='category' key={item}>
-            <h1> {item} </h1>
+            <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
             <div className='itemWraper'>
               {data[item].map((value) =>
                 <div key={value} style={{display: 'flex'}}>
@@ -149,10 +166,11 @@ class List extends Component {
               <h1> Change background </h1>
               <div className='color' style={{background: this.state.background}} />
             </div>
+            <button onClick={this.handleUpdate}> Save </button>
             { this.state.displayColorPicker ?
               <div className='popover'>
                 <div className='cover' onClick={ this.handleClose }/>
-                  <CirclePicker color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+                  <CirclePicker color={ this.state.background } onChangeComplete={ this.handleChangeComplete } handleColorChange={this.handleColorChange}/>
                 </div> : null }
           </div>
           <div className='wrapper'>

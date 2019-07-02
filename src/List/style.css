@@ -168,8 +168,7 @@ p {
 }
 
 .colorWrapper {
-  display: flex;
-  flex-direction: row-reverse;
+  display: inline-grid;
 }
 
 h1 {

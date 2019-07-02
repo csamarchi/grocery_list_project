@@ -11,25 +11,26 @@ class ListCategory extends Component {
 
   }
 
-  deleteItem = async (item, id, category) => {
-      console.log(item, id, category);
-      const sendData = {
-        item: item,
-        id: id,
-        category: category
-      };
-      console.log(sendData)
-
-      this.removeFromState(id, category)
-      const deleteItem = await fetch('http://localhost:9000/deleteItem', {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify(sendData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-    }
+  // deleteItem = async (item, id, category) => {
+  //     console.log(item, id, category);
+  //     const sendData = {
+  //       item: item,
+  //       id: id,
+  //       category: category
+  //     };
+  //     console.log(sendData)
+  //
+  //     this.removeFromState(id, category)
+  //     const deleteItem = await fetch('http://localhost:9000/deleteItem', {
+  //       method: 'POST',
+  //       credentials: 'include',
+  //       body: JSON.stringify(sendData),
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       }
+  //     })
+  //   }
+  
   removeFromState = (item, id, category) => {
       for (let key in this.state.list) {
           if(key === category) {
