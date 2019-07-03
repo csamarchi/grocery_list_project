@@ -87,6 +87,20 @@ class List extends Component {
     })
   }
 
+  // Remove list item onClick from the client side
+  removeFromState = (item, id, category) => {
+    //console.log(item, id, category);
+    for (let key in this.state.list) {
+        if(key === category) {
+          let index = this.state.list[key].indexOf(item);
+          this.state.list[key].splice(index, 1);
+        }
+      }
+      this.setState({
+        count: 'rerender'
+      })
+  }
+
   // addToState = (item, category) => {
   //   console.log(item, category);
   //   for (let key in this.state.list) {
@@ -127,21 +141,6 @@ class List extends Component {
     })
   }
 
-
-  // Remove list item onClick from the client side
-  removeFromState = (item, id, category) => {
-    //console.log(item, id, category);
-    for (let key in this.state.list) {
-        if(key === category) {
-          let index = this.state.list[key].indexOf(item);
-          this.state.list[key].splice(index, 1);
-        }
-      }
-      this.setState({
-        count: 'rerender'
-      })
-  }
-
   render() {
     console.log(this.state.color);
     let data = this.state.list
@@ -152,7 +151,12 @@ class List extends Component {
               {data[item].map((value) =>
                 <div key={value} style={{display: 'flex'}}>
                   <p className='item'> {value} </p>
-                  <button className='deleteButton' item={value} id={this.state._id} onClick={() => this.deleteItem(value, this.state._id, item)}>X</button>
+                  <button
+                    className='deleteButton'
+                    item={value} id={this.state._id}
+                    onClick={() => this.deleteItem(value, this.state._id, item)}>
+                      X
+                  </button>
                 </div>
               )}
             </div>
@@ -170,7 +174,7 @@ class List extends Component {
               <h1> Change background </h1>
               <div className='color' style={{background: this.state.background}} />
             </div>
-            <button onClick={this.handleUpdate}> Save </button>
+            <button className='saveColor' onClick={this.handleUpdate}> Save </button>
             { this.state.displayColorPicker ?
               <div className='popover'>
                 <div className='cover' onClick={ this.handleClose }/>
