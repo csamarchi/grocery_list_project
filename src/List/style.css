@@ -4,6 +4,12 @@
   flex-wrap: wrap;
 }
 
+.title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
 .category {
   border: 2px solid black;
   height: 270px;
@@ -21,6 +27,7 @@ form {
   font-size: 2em;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
+  margin: 10px;
 }
 
 .addItemInput, .addItemButton {
@@ -179,8 +186,20 @@ p {
 
 .saveColor:hover {
   cursor: pointer;
+  background-color: #a7a7a8;
 }
 
 h1 {
   font-family: "Courier New", Courier, monospace;
+}
+
+.edit:hover {
+  cursor: pointer;
+}
+
+.editInput {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 2px solid black;
 }

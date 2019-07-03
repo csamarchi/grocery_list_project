@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './style.css';
 import { CirclePicker } from 'react-color';
+import Edit from '@material-ui/icons/Edit';
 
 class List extends Component {
 
@@ -13,7 +14,8 @@ class List extends Component {
       list: [],
       background: 'rgba(243,249,251,.5)',
       displayColorPicker: false,
-      color: ''
+      color: '',
+      isEditing: false
     }
   }
 
@@ -58,7 +60,6 @@ class List extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-      console.log(list, 'waef')
       this.setState({list: list.data,
                     background: list.data.color})
     }).catch((err) => {
@@ -101,14 +102,26 @@ class List extends Component {
       })
   }
 
-  // addToState = (item, category) => {
-  //   console.log(item, category);
-  //   for (let key in this.state.list) {
-  //     if (key === category) {
-  //       this.state.lis[key].push(item)
-  //     }
-  //   }
-  // }
+  handleEdit = async () => {
+    console.log(this.state);
+    // const data = {
+    //   name: this.state.name,
+    //   listID: this.state._id
+    // };
+    //
+    // const editList = await fetch('http://localhost:9000/listcolor', {
+    //   method: 'POST',
+    //   credentials: 'include',
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+  }
+
+  toggleEdit = () => {
+    this.setState({ isEditing: !this.state.isEditing })
+  }
 
   handleChangeComplete = (color) => {
     this.setState({
@@ -142,7 +155,6 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.state.color);
     let data = this.state.list
     let categoryList = Object.keys(data).splice(0, 9).map((item) =>
           <div className='category' key={item}>
@@ -166,9 +178,21 @@ class List extends Component {
       <option key={item} value={item}>{item}</option>
     )
 
+
     return(
       <div className='background' style={{background: this.state.background}}>
+        <div className='title'>
           <h1 className='listName'> {this.props.data.name} </h1>
+          <Edit className='edit' onClick={this.toggleEdit} />
+          { this.state.isEditing ?
+            <div onSubmit={this.handleEdit}>
+            <form>
+              <input type='text' name='name' placeholder='edit name' className='editInput' style={{ backgroundColor: `${this.state.background}`}}/>
+              <button className='saveColor' > Save </button>
+            </form>
+            </div> : null
+          }
+        </div>
           <div className='colorWrapper'>
             <div className='swatch' onClick={ this.handleClick }>
               <h1> Change background </h1>

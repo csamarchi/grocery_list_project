@@ -20,7 +20,6 @@ class ShowPage extends Component {
 
   componentDidMount() {
     this.getlist().then((list) => {
-      console.log(list, 'christine');
       this.setState({list: list.data, dataLoaded: true})
     }).catch((err) => {
       console.log(err);
