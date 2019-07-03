@@ -104,12 +104,8 @@ class List extends Component {
       })
   }
 
-  shouldComponentUpdate() {
-    return true;
-  }
 
-  handleEdit = async (e) => {
-    e.preventDefault();
+  handleEdit = async () => {
     console.log(this.state);
     const data = {
       name: this.state.name,
@@ -127,7 +123,6 @@ class List extends Component {
     const editListJson = await editList.json();
     console.log(editListJson)
     
-      this.shouldComponentUpdate();
     
   }
 
