@@ -37,6 +37,8 @@ class List extends Component {
   }
 
   handleChange = (e) => {
+    console.log(e.currentTarget.name);
+    console.log(e.currentTarget.value)
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     })
@@ -102,21 +104,31 @@ class List extends Component {
       })
   }
 
-  handleEdit = async () => {
+  shouldComponentUpdate() {
+    return true;
+  }
+
+  handleEdit = async (e) => {
+    e.preventDefault();
     console.log(this.state);
-    // const data = {
-    //   name: this.state.name,
-    //   listID: this.state._id
-    // };
+    const data = {
+      name: this.state.name,
+      listID: this.state._id
+    };
     //
-    // const editList = await fetch('http://localhost:9000/listcolor', {
-    //   method: 'POST',
-    //   credentials: 'include',
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
+    const editList = await fetch('http://localhost:9000/edit', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const editListJson = await editList.json();
+    console.log(editListJson)
+    
+      this.shouldComponentUpdate();
+    
   }
 
   toggleEdit = () => {
@@ -185,9 +197,9 @@ class List extends Component {
           <h1 className='listName'> {this.props.data.name} </h1>
           <Edit className='edit' onClick={this.toggleEdit} />
           { this.state.isEditing ?
-            <div onSubmit={this.handleEdit}>
-            <form>
-              <input type='text' name='name' placeholder='edit name' className='editInput' style={{ backgroundColor: `${this.state.background}`}}/>
+            <div >
+            <form onSubmit={this.handleEdit}>
+              <input onChange={this.handleChange} type='text' name='name' placeholder='edit name' className='editInput' style={{ backgroundColor: `${this.state.background}`}}/>
               <button className='saveColor' > Save </button>
             </form>
             </div> : null
