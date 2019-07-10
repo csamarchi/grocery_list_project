@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './style.css';
 import { CirclePicker } from 'react-color';
 import Edit from '@material-ui/icons/Edit';
+import ColorPicker from './color.js';
 
 class List extends Component {
 
@@ -13,8 +14,6 @@ class List extends Component {
       _id: this.props.data._id,
       list: [],
       background: 'rgba(243,249,251,.5)',
-      displayColorPicker: false,
-      color: '',
       isEditing: false
     }
   }
@@ -37,11 +36,7 @@ class List extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.currentTarget.name);
-    console.log(e.currentTarget.value)
-    this.setState({
-      [e.currentTarget.name]: e.currentTarget.value
-    })
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value })
   }
 
   getList = async () => {
@@ -63,7 +58,7 @@ class List extends Component {
   componentDidMount() {
     this.getList().then((list) => {
       this.setState({list: list.data,
-                    background: list.data.color})
+                     background: list.data.color})
     }).catch((err) => {
       console.log(err);
     })
@@ -104,14 +99,11 @@ class List extends Component {
       })
   }
 
-
   handleEdit = async () => {
-    console.log(this.state);
     const data = {
       name: this.state.name,
       listID: this.state._id
     };
-    //
     const editList = await fetch('http://localhost:9000/edit', {
       method: 'POST',
       credentials: 'include',
@@ -121,31 +113,18 @@ class List extends Component {
       }
     });
     const editListJson = await editList.json();
-    console.log(editListJson)
-    
-    
   }
 
   toggleEdit = () => {
     this.setState({ isEditing: !this.state.isEditing })
   }
 
-  handleChangeComplete = (color) => {
-    this.setState({
-      background: color.hex,
-     });
-     console.log(this.state.color);
+  handleColorChange = (color) => {
+    this.setState({ background: color.hex });
   };
 
-  handleClick = () => {
-  this.setState({ displayColorPicker: !this.state.displayColorPicker })
-};
 
-  handleClose = () => {
-    this.setState({ displayColorPicker: false })
-  };
-
-  handleUpdate = async () => {
+  handleUpdate = async (color) => {
     const data = {
       color: this.state.background,
       listID: this.state._id
@@ -185,7 +164,6 @@ class List extends Component {
       <option key={item} value={item}>{item}</option>
     )
 
-
     return(
       <div className='background' style={{background: this.state.background}}>
         <div className='title'>
@@ -200,18 +178,10 @@ class List extends Component {
             </div> : null
           }
         </div>
-          <div className='colorWrapper'>
-            <div className='swatch' onClick={ this.handleClick }>
-              <h1> Change background </h1>
-              <div className='color' style={{background: this.state.background}} />
-            </div>
-            <button className='saveColor' onClick={this.handleUpdate}> Save </button>
-            { this.state.displayColorPicker ?
-              <div className='popover'>
-                <div className='cover' onClick={ this.handleClose }/>
-                  <CirclePicker color={ this.state.background } onChangeComplete={ this.handleChangeComplete } handleColorChange={this.handleColorChange}/>
-                </div> : null }
-          </div>
+          <ColorPicker
+            handleUpdate={this.handleUpdate}
+            onChange={this.handleColorChange}
+          />
           <div className='wrapper'>
             <form>
               <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
