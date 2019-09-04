@@ -19,7 +19,13 @@ class List extends Component {
   }
 
   handleSubmit = async (e) => {
-    const data = this.state.list;
+    e.preventDefault();
+    // console.log(this.state.category, this.state.name)
+    let data = this.state.list;
+    // let category = this.state.category;
+    // data[category].push(this.state.name);
+    // console.log(data[category], 'category')
+    // data[this.state.category]
     try {
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
@@ -29,7 +35,15 @@ class List extends Component {
           'Content-Type': 'application/json'
         }
       });
-      this.setState({list: data})
+      console.log('1')
+      setTimeout(async() => {
+        console.log('2')
+        const addItemResponse = await addItem;
+        this.setState({list: data})
+        // console.log(this.state.list)
+        return;
+      }, 2000)
+ 
     } catch(err) {
       console.log(err);
     }
@@ -142,12 +156,15 @@ class List extends Component {
 
   render() {
     let data = this.state.list
-    let categoryList = Object.keys(data).splice(0, 9).map((item) =>
-          <div className='category' key={item}>
+    let categoryList = Object.keys(data).splice(0, 9).map((item, idx) =>
+          <div className='category' key={idx}>
             <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
             <div className='itemWraper'>
+              {console.log(data, '-----')}
+              {console.log(data[item], '12414')}
               {data[item].map((value) =>
                 <div key={value} style={{display: 'flex'}}>
+                {console.log(value, 'value')}
                   <p className='item'> {value} </p>
                   <button
                     className='deleteButton'
@@ -183,7 +200,7 @@ class List extends Component {
             onChange={this.handleColorChange}
           />
           <div className='wrapper'>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
               <div className="select">
                 <select name='category' onChange={this.handleChange}>
@@ -191,7 +208,7 @@ class List extends Component {
                     {category}
                 </select>
               </div>
-              <button onClick={this.handleSubmit} className='addItemButton'> + </button>
+              <button className='addItemButton'> + </button>
             </form>
           </div>
           <div className='categoryWrapper'>
