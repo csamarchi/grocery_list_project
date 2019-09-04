@@ -19,13 +19,11 @@ class List extends Component {
   }
 
   handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // console.log(this.state.category, this.state.name)
-    let data = this.state.list;
+    // let data = this.state.list;
     // let category = this.state.category;
     // data[category].push(this.state.name);
-    // console.log(data[category], 'category')
-    // data[this.state.category]
     try {
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
@@ -35,15 +33,6 @@ class List extends Component {
           'Content-Type': 'application/json'
         }
       });
-      console.log('1')
-      setTimeout(async() => {
-        console.log('2')
-        const addItemResponse = await addItem;
-        this.setState({list: data})
-        // console.log(this.state.list)
-        return;
-      }, 2000)
- 
     } catch(err) {
       console.log(err);
     }
@@ -86,8 +75,6 @@ class List extends Component {
       id: id,
       category: category
     };
-    console.log(sendData)
-
     this.removeFromState(item, id, category)
     const deleteItem = await fetch('http://localhost:9000/deleteItem', {
       method: 'POST',
@@ -160,11 +147,8 @@ class List extends Component {
           <div className='category' key={idx}>
             <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
             <div className='itemWraper'>
-              {console.log(data, '-----')}
-              {console.log(data[item], '12414')}
               {data[item].map((value) =>
                 <div key={value} style={{display: 'flex'}}>
-                {console.log(value, 'value')}
                   <p className='item'> {value} </p>
                   <button
                     className='deleteButton'
@@ -182,7 +166,7 @@ class List extends Component {
     )
 
     return(
-      <div className='background' style={{background: this.state.background, height: '100vh'}}>
+      <div className='background' style={{background: this.state.background}}>
         <div className='title'>
           <h1 className='listName'> {this.props.data.name} </h1>
           <Edit className='edit' onClick={this.toggleEdit} />
@@ -211,7 +195,7 @@ class List extends Component {
               <button className='addItemButton'> + </button>
             </form>
           </div>
-          <div className='categoryWrapper'>
+          <div className='categoryWrapper' style={{background: this.state.background}}>
               {categoryList}
           </div>
       </div>
