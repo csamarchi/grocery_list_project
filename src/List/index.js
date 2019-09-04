@@ -182,7 +182,7 @@ class List extends Component {
     )
 
     return(
-      <div className='background' style={{background: this.state.background}}>
+      <div className='background' style={{background: this.state.background, height: '100vh'}}>
         <div className='title'>
           <h1 className='listName'> {this.props.data.name} </h1>
           <Edit className='edit' onClick={this.toggleEdit} />
