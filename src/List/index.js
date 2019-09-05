@@ -88,8 +88,10 @@ class List extends Component {
 
   // Remove list item onClick from the client side
   removeFromState = (item, id, category) => {
-    //console.log(item, id, category);
+    console.log(item, id, category);
+    console.log('state', this.state.list);
     for (let key in this.state.list) {
+      console.log('key', key);
         if(key === category) {
           let index = this.state.list[key].indexOf(item);
           this.state.list[key].splice(index, 1);
