@@ -4,11 +4,11 @@ import List from '../List';
 import Adder from './adder.js';
 
 class CreateList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
-      // list: this.props.list,
+      id: props.id,
       displayAdder: false,
     }
   }
@@ -20,7 +20,7 @@ class CreateList extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     console.log(this.state, 'worked');
-    console.log(this.props.list);
+    // console.log(this.props.list);
     try {
       const addedCategory = await fetch('http://localhost:9000/addCategory', {
         method: 'POST',
@@ -30,7 +30,8 @@ class CreateList extends Component {
           'Content-Type': 'application/json'
         }
       });
-      console.log(addedCategory)
+      let categoryResponse = await addedCategory.json();
+      await console.log(categoryResponse)
 
     } catch (err) {
       console.log(err);
@@ -46,7 +47,11 @@ class CreateList extends Component {
     return(
       <div className='background'>
         <div className='wrapper'>
-          <Adder />
+          <Adder
+            onSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            name={this.state.name}
+          />
         </div>
       </div>
     )

@@ -184,7 +184,10 @@ class List extends Component {
             handleUpdate={this.handleUpdate}
             onChange={this.handleColorChange}
           />
-          <CreateCategory list={this.state.list} />
+          <CreateCategory
+            list={this.state.list}
+            id={this.state._id}
+          />
       </div>
     )
   }

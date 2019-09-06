@@ -10,6 +10,7 @@ class Adder extends Component {
     }
   }
 
+
   handleClick = () => {
   this.setState({ displayAdder: !this.state.displayAdder })
 };
@@ -25,8 +26,8 @@ class Adder extends Component {
         { this.state.displayAdder ?
           <div>
             <div onClick={ this.handleClose }/>
-                <form className='addForm' onSubmit={this.handleSubmit}>
-                  <input onChange={this.handleChange} className='addItemInput' type='text' name='name' placeholder='create a category..' />
+                <form className='addForm' onSubmit={this.props.onSubmit}>
+                  <input onChange={this.props.handleChange} className='addItemInput' type='text' name='name' placeholder='create a category..' />
                   <button className='addItemButton'> + </button>
                   {/*<button className='cancelItemButton'> x </button>*/}
                 </form>
