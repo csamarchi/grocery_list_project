@@ -31,22 +31,41 @@ form {
   margin: 10px;
 }
 
-.addItemInput, .addItemButton {
-  width: 96%;
+
+.addItemInput {
+  width: 72%;
   margin: 10px;
   border-radius: 5px;
 }
 
 .addItemButton {
-  background-color: #db5555;
-  font-size: 2em;
+  background-color: grey;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-color: grey;
+  font-size: 1.5em;
   line-height: 0;
   height: 1em;
+  margin: 10px;
+  border-radius: 5px;
+  width: 13%;
+}
+
+.cancelItemButton {
+  width: 10%;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  background-color: #db5555;
+  border-color: #db5555;
+  font-size: 1.5em;
+  border-radius: 5px;
+  line-height: 0;
+  height: 1em;
+  margin: 10px;
 }
 
 .addItemButton:hover {
-  background-color: white;
-  color: #db5555;
+  background-color: #adaca8;
+  border-color: #adaca8;
+  color: white;
   cursor: pointer;
 }
 

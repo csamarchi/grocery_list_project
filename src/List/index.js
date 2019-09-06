@@ -3,6 +3,7 @@ import './style.css';
 import { CirclePicker } from 'react-color';
 import Edit from '@material-ui/icons/Edit';
 import ColorPicker from './color.js';
+import CreateCategory from '../CreateCategory';
 
 class List extends Component {
 
@@ -88,10 +89,7 @@ class List extends Component {
 
   // Remove list item onClick from the client side
   removeFromState = (item, id, category) => {
-    console.log(item, id, category);
-    console.log('state', this.state.list);
     for (let key in this.state.list) {
-      console.log('key', key);
         if(key === category) {
           let index = this.state.list[key].indexOf(item);
           this.state.list[key].splice(index, 1);
@@ -115,7 +113,7 @@ class List extends Component {
         'Content-Type': 'application/json'
       }
     });
-    const editListJson = await editList.json();
+    // const editListJson = await editList.json();
   }
 
   toggleEdit = () => {
@@ -144,28 +142,29 @@ class List extends Component {
   }
 
   render() {
-    let data = this.state.list
-    let categoryList = Object.keys(data).splice(0, 9).map((item, idx) =>
-          <div className='category' key={idx}>
-            <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
-            <div className='itemWraper'>
-              {data[item].map((value) =>
-                <div key={value} style={{display: 'flex'}}>
-                  <p className='item'> {value} </p>
-                  <button
-                    className='deleteButton'
-                    item={value} id={this.state._id}
-                    onClick={() => this.deleteItem(value, this.state._id, item)}>
-                      X
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        )
-    let category = Object.keys(data).splice(0, 9).map((item) =>
-      <option key={item} value={item}>{item}</option>
-    )
+    // let data = this.state.list
+    // console.log(data);
+    // let categoryList = Object.keys(data).splice(0, 9).map((item, idx) =>
+    //       <div className='category' key={idx}>
+    //         <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
+    //         <div className='itemWraper'>
+    //           {data[item].map((value) =>
+    //             <div key={value} style={{display: 'flex'}}>
+    //               <p className='item'> {value} </p>
+    //               <button
+    //                 className='deleteButton'
+    //                 item={value} id={this.state._id}
+    //                 onClick={() => this.deleteItem(value, this.state._id, item)}>
+    //                   X
+    //               </button>
+    //             </div>
+    //           )}
+    //         </div>
+    //       </div>
+    //     )
+    // let category = Object.keys(data).splice(0, 9).map((item) =>
+    //   <option key={item} value={item}>{item}</option>
+    // )
 
     return(
       <div className='background' style={{background: this.state.background}}>
@@ -185,24 +184,26 @@ class List extends Component {
             handleUpdate={this.handleUpdate}
             onChange={this.handleColorChange}
           />
-          <div className='wrapper'>
-            <form onSubmit={this.handleSubmit}>
-              <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
-              <div className="select">
-                <select name='category' onChange={this.handleChange}>
-                  <option> Choose a category </option>
-                    {category}
-                </select>
-              </div>
-              <button className='addItemButton'> + </button>
-            </form>
-          </div>
-          <div className='categoryWrapper' style={{background: this.state.background}}>
-              {categoryList}
-          </div>
+          <CreateCategory list={this.state.list} />
       </div>
     )
   }
 }
 
 export default List;
+
+// <div className='wrapper'>
+//   <form onSubmit={this.handleSubmit}>
+//     <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
+//     <div className="select">
+//       <select name='category' onChange={this.handleChange}>
+//         <option> Choose a category </option>
+//           {category}
+//       </select>
+//     </div>
+//     <button className='addItemButton'> + </button>
+//   </form>
+// </div>
+// <div className='categoryWrapper' style={{background: this.state.background}}>
+//     {categoryList}
+// </div>
