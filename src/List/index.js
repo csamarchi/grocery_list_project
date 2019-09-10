@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './style.css';
-import { CirclePicker } from 'react-color';
+// import { CirclePicker } from 'react-color';
 import Edit from '@material-ui/icons/Edit';
 import ColorPicker from './color.js';
 import CreateCategory from '../CreateCategory';
@@ -13,9 +13,11 @@ class List extends Component {
       category: '',
       name: '',
       _id: this.props.data._id,
-      list: [],
+      list: {
+        categories: []
+      },
       background: 'rgba(243,249,251,.5)',
-      isEditing: false
+      isEditing: false,
     }
   }
 
@@ -62,7 +64,8 @@ class List extends Component {
   componentDidMount() {
     this.getList().then((list) => {
       this.setState({list: list.data,
-                     background: list.data.color})
+                     background: list.data.color,
+                   })
     }).catch((err) => {
       console.log(err);
     })
@@ -142,8 +145,14 @@ class List extends Component {
   }
 
   render() {
-    // let data = this.state.list
-    // console.log(data);
+    const data = this.state.list.categories
+    console.log(data);
+    let categoryList = data.map((item, key) =>
+      <div className='category' key={key}>
+        <h1 style={{ textTransform: 'capitalize'}}> {item.name} </h1>
+      </div>
+  )
+
     // let categoryList = Object.keys(data).splice(0, 9).map((item, idx) =>
     //       <div className='category' key={idx}>
     //         <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
@@ -188,6 +197,9 @@ class List extends Component {
             list={this.state.list}
             id={this.state._id}
           />
+          <div className='categoryWrapper' style={{background: this.state.background}}>
+            {categoryList}
+          </div>
       </div>
     )
   }

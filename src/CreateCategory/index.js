@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './style.css';
-import List from '../List';
+// import List from '../List';
 import Adder from './adder.js';
 
 class CreateList extends Component {
@@ -35,7 +35,6 @@ class CreateList extends Component {
 
     } catch (err) {
       console.log(err);
-      console.log('error');
     }
   }
 
