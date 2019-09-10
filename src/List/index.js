@@ -4,6 +4,8 @@ import './style.css';
 import Edit from '@material-ui/icons/Edit';
 import ColorPicker from './color.js';
 import CreateCategory from '../CreateCategory';
+import Close from '@material-ui/icons/Close';
+import { Tooltip } from '@material-ui/core';
 
 class List extends Component {
 
@@ -13,10 +15,13 @@ class List extends Component {
       // category: '',
       name: '',
       _id: this.props.data._id,
-      list: {
-        categories: [ {name: ''} ]
-      },
-      background: 'rgba(243,249,251,.5)',
+      // list: {
+      //   categories: [ {name: ''} ],
+      //   name: this.props.data.name,
+      // },
+      background: props.data.color,
+      list: props.data,
+      // background: 'rgba(243,249,251,.5)',
       isEditing: false,
       categoryName: '',
     }
@@ -64,7 +69,7 @@ class List extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-      this.setState({list: list.data,
+      this.setState({
                      background: list.data.color,
                    })
     }).catch((err) => {
@@ -104,7 +109,28 @@ class List extends Component {
       })
   }
 
-  handleEdit = async () => {
+  //Delete Category
+  deleteCategory = async (e, itemID) => {
+    console.log(itemID);
+    const deleteCategory = await fetch('http://localhost:9000/' + itemID, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const responseList = await deleteCategory.json();
+    //await  console.log(deleteCategory, '56789');
+  }
+
+  updateState = (data) => {
+    this.setState({
+      list: data
+    })
+  }
+
+  handleEdit = async (e) => {
+    e.preventDefault();
     const data = {
       name: this.state.name,
       listID: this.state._id
@@ -117,7 +143,14 @@ class List extends Component {
         'Content-Type': 'application/json'
       }
     });
-    // const editListJson = await editList.json();
+    const editResponse = await editList.json();
+    // console.log(editResponse);
+    this.setState({
+      list: {
+        ...this.state.list,
+        name: data.name,
+      },
+    })
   }
 
   toggleEdit = () => {
@@ -147,14 +180,24 @@ class List extends Component {
 
 
   render() {
-    const data = this.state.list.categories
-    console.log(data);
+    console.log(this.state, '456789');
+    const data = this.state.list.categories;
+    // console.log(data, 'DATTAATATATATATA')
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
-        <h1 style={{ textTransform: 'capitalize'}}> {item.name} </h1>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
+          <Tooltip title='Delete List' placement="top">
+            <Close
+              onClick={e => this.deleteCategory(e, item._id)}
+              className='cancel'
+            />
+          </Tooltip>
+        </div>
           <form>
             <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
           </form>
+
       </div>
   )
 
@@ -183,13 +226,14 @@ class List extends Component {
     return(
       <div className='background' style={{background: this.state.background}}>
         <div className='title'>
-          <h1 className='listName'> {this.props.data.name} </h1>
+          <h1 className='listName'> {this.state.list.name} </h1>
           <Edit className='edit' onClick={this.toggleEdit} />
           { this.state.isEditing ?
             <div >
-            <form onSubmit={this.handleEdit}>
+            <form onSubmit={this.handleEdit} style={{marginRight: '-320px'}}>
               <input onChange={this.handleChange} type='text' name='name' placeholder='edit name' className='editInput' style={{ backgroundColor: `${this.state.background}`}}/>
               <button className='saveColor' > Save </button>
+              <Close onClick={this.toggleEdit} className='cancel'/>
             </form>
             </div> : null
           }
@@ -202,6 +246,7 @@ class List extends Component {
             list={this.state.list}
             id={this.state._id}
             getList={this.getList}
+            updateState={this.updateState}
           />
           <div className='categoryWrapper' style={{background: this.state.background}}>
             {categoryList}

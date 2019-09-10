@@ -7,9 +7,10 @@ class CreateList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: props.name,
+      name: '',
       id: props.id,
       displayAdder: false,
+      list: this.props.list,
     }
   }
 
@@ -19,7 +20,7 @@ class CreateList extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state, 'worked');
+    //console.log(this.state, 'worked');
     try {
       const addedCategory = await fetch('http://localhost:9000/addCategory', {
         method: 'POST',
@@ -30,10 +31,8 @@ class CreateList extends Component {
         }
       });
       let categoryResponse = await addedCategory.json();
-      await console.log(categoryResponse)
-      await console.log('1');
-      await this.props.getList();
-      await console.log('2')
+      console.log(categoryResponse);
+      await this.props.updateState(categoryResponse.data)
 
     } catch (err) {
       console.log(err);
@@ -41,7 +40,7 @@ class CreateList extends Component {
   }
 
   render() {
-
+    console.log(this.state, 'state');
 
     return(
       <div className='background'>

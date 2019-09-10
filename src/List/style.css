@@ -13,17 +13,18 @@
 }
 
 .category {
-  border: 2px solid black;
   height: 270px;
   width: 250px;
   padding: 10px;
   margin: 10px;
   overflow: auto;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  background-color: #d5d9de;
 }
 
-form {
+/* form {
   padding: 20px;
-}
+} */
 
 .listName {
   text-align: center;
@@ -196,6 +197,7 @@ p {
   display: inline-block;
   cursor: pointer;
   border-radius: 5px;
+  margin-bottom: 5px;
 }
 
 .colorWrapper {
@@ -205,11 +207,13 @@ p {
 .saveColor {
   border-radius: 5px;
   margin-top: 5px;
+  margin: 10px
 }
 
 .saveColor:hover {
   cursor: pointer;
   background-color: #a7a7a8;
+  border-color: #a7a7a8;
 }
 
 h1 {
@@ -225,4 +229,9 @@ h1 {
   border-right: none;
   border-left: none;
   border-bottom: 2px solid black;
+}
+
+.cancel:hover {
+  cursor: pointer;
+  color: #a2a6a3;
 }
