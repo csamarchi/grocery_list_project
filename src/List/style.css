@@ -22,9 +22,9 @@
   background-color: #d5d9de;
 }
 
-form {
+/* form {
   padding: 20px;
-}
+} */
 
 .listName {
   text-align: center;
@@ -207,11 +207,13 @@ p {
 .saveColor {
   border-radius: 5px;
   margin-top: 5px;
+  margin: 10px
 }
 
 .saveColor:hover {
   cursor: pointer;
   background-color: #a7a7a8;
+  border-color: #a7a7a8;
 }
 
 h1 {

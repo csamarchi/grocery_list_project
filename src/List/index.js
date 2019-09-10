@@ -4,6 +4,8 @@ import './style.css';
 import Edit from '@material-ui/icons/Edit';
 import ColorPicker from './color.js';
 import CreateCategory from '../CreateCategory';
+import Close from '@material-ui/icons/Close';
+import { Tooltip } from '@material-ui/core';
 
 class List extends Component {
 
@@ -118,10 +120,9 @@ class List extends Component {
         'Content-Type': 'application/json'
       }
     });
-    const editResponse = await editList.json();
+    //const editResponse = await editList.json();
     this.setState({
       name: this.state.name,
-      count: 'rerender',
     })
   }
 
@@ -156,10 +157,16 @@ class List extends Component {
     console.log(data);
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
-        <h1 style={{ textTransform: 'capitalize'}}> {item.name} </h1>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
+          <Tooltip title='Delete List' placement="top">
+            <Close className='cancel'/>
+          </Tooltip>
+        </div>
           <form>
             <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
           </form>
+
       </div>
   )
 
@@ -192,9 +199,10 @@ class List extends Component {
           <Edit className='edit' onClick={this.toggleEdit} />
           { this.state.isEditing ?
             <div >
-            <form onSubmit={this.handleEdit}>
+            <form onSubmit={this.handleEdit} style={{marginRight: '-320px'}}>
               <input onChange={this.handleChange} type='text' name='name' placeholder='edit name' className='editInput' style={{ backgroundColor: `${this.state.background}`}}/>
               <button className='saveColor' > Save </button>
+              <Close onClick={this.toggleEdit} className='cancel'/>
             </form>
             </div> : null
           }

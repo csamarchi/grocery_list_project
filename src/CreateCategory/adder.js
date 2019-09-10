@@ -30,7 +30,11 @@ class Adder extends Component {
                 <form className='addForm' onSubmit={this.props.onSubmit}>
                   <input onChange={this.props.handleChange} className='addItemInput' type='text' name='name' placeholder='create a category..' />
                   <button className='addItemButton'> + </button>
-                  <Close onClick={this.handleClose} className='cancel' />
+                  <Close
+                    onClick={this.handleClose}
+                    className='cancel'
+                    style={{ marginLeft: '10px' }}
+                  />
                   {/*<button className='cancelItemButton'> x </button>*/}
                 </form>
             </div> :
