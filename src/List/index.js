@@ -175,6 +175,7 @@ class List extends Component {
   render() {
     //console.log(this.props.data);
     const data = this.state.list.categories
+    console.log(data);
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>

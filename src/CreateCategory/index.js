@@ -46,7 +46,7 @@ class CreateList extends Component {
   }
 
   render() {
-    console.log(this.props.list);
+    //console.log(this.props.list);
 
     return(
       <div className='background'>
