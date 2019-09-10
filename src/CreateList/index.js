@@ -19,7 +19,7 @@ class CreateList extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state, 'worked');
+    // console.log(this.state, 'worked');
 
     try {
       const addedList = await fetch('http://localhost:9000/create', {
@@ -30,17 +30,19 @@ class CreateList extends Component {
           'Content-Type': 'application/json'
         }
       });
-      console.log(addedList)
+      // console.log(addedList)
 
       const parsedResponse = await addedList.json();
-      console.log(parsedResponse, 'this is our parsed data at login');
+      // console.log(parsedResponse, 'this is  our parsed data at login');
+      let link = await '/'.concat(parsedResponse.data._id);
+      await console.log(link, 'LINKINK')
 
-      this.setState({
-        createdPostId: parsedResponse.data,
-        list: true
-      })
-      console.log(this.props.history)
-      this.props.history.push('/'+ this.state.createdPostId)
+      await console.log(parsedResponse, 'PARSED RESPONSE')
+      await this.props.history.push(link)
+      // console.log(this.props.history)
+      // console.log()
+
+
 
     } catch (err) {
       console.log(err);

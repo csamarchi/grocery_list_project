@@ -19,8 +19,9 @@ class List extends Component {
       //   categories: [ {name: ''} ],
       //   name: this.props.data.name,
       // },
-      list: this.props.data,
-      background: 'rgba(243,249,251,.5)',
+      background: props.data.color,
+      list: props.data,
+      // background: 'rgba(243,249,251,.5)',
       isEditing: false,
       categoryName: '',
     }
@@ -122,6 +123,12 @@ class List extends Component {
     //await  console.log(deleteCategory, '56789');
   }
 
+  updateState = (data) => {
+    this.setState({
+      list: data
+    })
+  }
+
   handleEdit = async (e) => {
     e.preventDefault();
     const data = {
@@ -173,9 +180,9 @@ class List extends Component {
 
 
   render() {
-    //console.log(this.props.data);
-    const data = this.state.list.categories
-    console.log(data);
+    console.log(this.state, '456789');
+    const data = this.state.list.categories;
+    // console.log(data, 'DATTAATATATATATA')
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -238,6 +245,8 @@ class List extends Component {
           <CreateCategory
             list={this.state.list}
             id={this.state._id}
+            getList={this.getList}
+            updateState={this.updateState}
           />
           <div className='categoryWrapper' style={{background: this.state.background}}>
             {categoryList}

@@ -32,13 +32,7 @@ class CreateList extends Component {
       });
       let categoryResponse = await addedCategory.json();
       console.log(categoryResponse);
-      await this.setState({
-        list: {
-          ...this.state.list,
-          list: this.state.list
-        }
-      })
-      await console.log(categoryResponse)
+      await this.props.updateState(categoryResponse.data)
 
     } catch (err) {
       console.log(err);
@@ -46,7 +40,7 @@ class CreateList extends Component {
   }
 
   render() {
-    //console.log(this.props.list);
+    console.log(this.state, 'state');
 
     return(
       <div className='background'>
