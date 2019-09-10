@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 
-
 class DisplayLists extends Component {
   constructor() {
     super();
@@ -29,9 +28,8 @@ class DisplayLists extends Component {
 
   render() {
 
-
     const showList = this.props.lists.map((item, i) => {
-      console.log(this.props.lists[i].color);
+      //console.log(this.props.lists);
       return (
         <div key={item._id} className='listDiv' style={{ backgroundColor: `${this.props.lists[i].color}` }}>
           <h4> {item.name} </h4>
