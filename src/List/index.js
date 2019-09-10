@@ -15,9 +15,11 @@ class List extends Component {
       // category: '',
       name: '',
       _id: this.props.data._id,
-      list: {
-        categories: [ {name: ''} ]
-      },
+      // list: {
+      //   categories: [ {name: ''} ],
+      //   name: this.props.data.name,
+      // },
+      list: this.props.data,
       background: 'rgba(243,249,251,.5)',
       isEditing: false,
       categoryName: '',
@@ -66,7 +68,7 @@ class List extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-      this.setState({list: list.data,
+      this.setState({
                      background: list.data.color,
                    })
     }).catch((err) => {
@@ -106,6 +108,20 @@ class List extends Component {
       })
   }
 
+  //Delete Category
+  deleteCategory = async (e, itemID) => {
+    console.log(itemID);
+    const deleteCategory = await fetch('http://localhost:9000/' + itemID, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const responseList = await deleteCategory.json();
+    //await  console.log(deleteCategory, '56789');
+  }
+
   handleEdit = async (e) => {
     e.preventDefault();
     const data = {
@@ -120,9 +136,13 @@ class List extends Component {
         'Content-Type': 'application/json'
       }
     });
-    //const editResponse = await editList.json();
+    const editResponse = await editList.json();
+    // console.log(editResponse);
     this.setState({
-      name: this.state.name,
+      list: {
+        ...this.state.list,
+        name: data.name,
+      },
     })
   }
 
@@ -153,14 +173,17 @@ class List extends Component {
 
 
   render() {
+    //console.log(this.props.data);
     const data = this.state.list.categories
-    console.log(data);
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
           <Tooltip title='Delete List' placement="top">
-            <Close className='cancel'/>
+            <Close
+              onClick={e => this.deleteCategory(e, item._id)}
+              className='cancel'
+            />
           </Tooltip>
         </div>
           <form>
@@ -195,7 +218,7 @@ class List extends Component {
     return(
       <div className='background' style={{background: this.state.background}}>
         <div className='title'>
-          <h1 className='listName'> {this.props.data.name} </h1>
+          <h1 className='listName'> {this.state.list.name} </h1>
           <Edit className='edit' onClick={this.toggleEdit} />
           { this.state.isEditing ?
             <div >

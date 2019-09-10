@@ -10,6 +10,7 @@ class CreateList extends Component {
       name: '',
       id: props.id,
       displayAdder: false,
+      list: this.props.list,
     }
   }
 
@@ -30,8 +31,12 @@ class CreateList extends Component {
         }
       });
       let categoryResponse = await addedCategory.json();
+      console.log(categoryResponse);
       await this.setState({
-        name: this.state.name
+        list: {
+          ...this.state.list,
+          list: this.state.list
+        }
       })
       await console.log(categoryResponse)
 
@@ -41,7 +46,7 @@ class CreateList extends Component {
   }
 
   render() {
-
+    console.log(this.props.list);
 
     return(
       <div className='background'>
