@@ -10,14 +10,15 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state={
-      category: '',
+      // category: '',
       name: '',
       _id: this.props.data._id,
       list: {
-        categories: []
+        categories: [ {name: ''} ]
       },
       background: 'rgba(243,249,251,.5)',
       isEditing: false,
+      categoryName: '',
     }
   }
 
@@ -144,12 +145,16 @@ class List extends Component {
     })
   }
 
+
   render() {
     const data = this.state.list.categories
     console.log(data);
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
         <h1 style={{ textTransform: 'capitalize'}}> {item.name} </h1>
+          <form>
+            <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
+          </form>
       </div>
   )
 

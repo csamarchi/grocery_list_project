@@ -7,7 +7,7 @@ class CreateList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: props.name,
       id: props.id,
       displayAdder: false,
     }
@@ -18,9 +18,8 @@ class CreateList extends Component {
   }
 
   handleSubmit = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     console.log(this.state, 'worked');
-    // console.log(this.props.list);
     try {
       const addedCategory = await fetch('http://localhost:9000/addCategory', {
         method: 'POST',
@@ -37,8 +36,6 @@ class CreateList extends Component {
       console.log(err);
     }
   }
-
-
 
   render() {
 

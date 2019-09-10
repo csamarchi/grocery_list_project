@@ -16,7 +16,16 @@
   text-align: center;
 }
 
+.add:hover {
+  color: white;
+}
+
 .addForm {
   margin-left: 35px;
   margin-top: 25px;
+}
+
+.cancel:hover {
+  cursor: pointer;
+  color: #a2a6a3;
 }
