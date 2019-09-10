@@ -21,11 +21,9 @@ class List extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(this.state.category, this.state.name)
-    let data = this.state.list;
+    // let data = this.state.list;
     // let category = this.state.category;
     // data[category].push(this.state.name);
-    // console.log(data[category], 'category')
-    // data[this.state.category]
     try {
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
@@ -35,15 +33,8 @@ class List extends Component {
           'Content-Type': 'application/json'
         }
       });
-      console.log('1')
-      setTimeout(async() => {
-        console.log('2')
-        const addItemResponse = await addItem;
-        this.setState({list: data})
-        // console.log(this.state.list)
-        return;
-      }, 2000)
- 
+      const addItemResponse = await addItem.json();
+      await console.log(addItemResponse)
     } catch(err) {
       console.log(err);
     }
