@@ -104,7 +104,8 @@ class List extends Component {
       })
   }
 
-  handleEdit = async () => {
+  handleEdit = async (e) => {
+    e.preventDefault();
     const data = {
       name: this.state.name,
       listID: this.state._id
@@ -117,7 +118,11 @@ class List extends Component {
         'Content-Type': 'application/json'
       }
     });
-    // const editListJson = await editList.json();
+    const editResponse = await editList.json();
+    this.setState({
+      name: this.state.name,
+      count: 'rerender',
+    })
   }
 
   toggleEdit = () => {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './style.css';
 import { CirclePicker } from 'react-color';
+import Close from '@material-ui/icons/Close';
 
 class ColorPicker extends Component {
 
@@ -27,12 +28,13 @@ class ColorPicker extends Component {
           <h1> Change background </h1>
           <div className='color' />
         </div>
-        <button className='saveColor' onClick={this.props.handleUpdate}> Save </button>
         { this.state.displayColorPicker ?
           <div className='popover'>
-            <div className='cover' onClick={ this.handleClose }/>
-              <CirclePicker onChangeComplete={ this.props.onChange } />
-            </div> : null }
+            <CirclePicker onChangeComplete={ this.props.onChange } />
+            <button className='saveColor' onClick={this.props.handleUpdate}> Save </button>
+            <Close onClick={this.handleClose} className='cancel'/>
+          </div> : null
+        }
       </div>
     )
   }
