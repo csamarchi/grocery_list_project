@@ -10,7 +10,7 @@ class CreateList extends Component {
       name: '',
       id: props.id,
       displayAdder: false,
-      list: this.props.list,
+      // list: this.props.list,
     }
   }
 
@@ -40,7 +40,7 @@ class CreateList extends Component {
   }
 
   render() {
-    console.log(this.state, 'state');
+    //console.log(this.state, 'state');
 
     return(
       <div className='background'>
