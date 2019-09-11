@@ -120,9 +120,10 @@ class List extends Component {
       }
     });
     const responseList = await deleteCategory.json();
-    //await  console.log(deleteCategory, '56789');
+    await  console.log(deleteCategory, '56789');
   }
 
+//Updating state for adding Category function in CreateCategory component
   updateState = (data) => {
     this.setState({
       list: data
@@ -161,7 +162,6 @@ class List extends Component {
     this.setState({ background: color.hex });
   };
 
-
   handleUpdate = async (color) => {
     const data = {
       color: this.state.background,
@@ -180,7 +180,7 @@ class List extends Component {
 
 
   render() {
-    console.log(this.state, '456789');
+    //console.log(this.state, '456789');
     const data = this.state.list.categories;
     // console.log(data, 'DATTAATATATATATA')
     let categoryList = data.map((item, key) =>
