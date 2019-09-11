@@ -112,7 +112,7 @@ class List extends Component {
   //Delete Category
   deleteCategory = async (e, itemID) => {
     console.log(itemID);
-    const deleteCategory = await fetch('http://localhost:9000/' + itemID, {
+    const deleteCategory = await fetch('http://localhost:9000/deleteCategory/' + itemID, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
