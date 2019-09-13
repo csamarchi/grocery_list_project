@@ -15,18 +15,14 @@ class List extends Component {
       // category: '',
       name: '',
       _id: this.props.data._id,
-      // list: {
-      //   categories: [ {name: ''} ],
-      //   name: this.props.data.name,
-      // },
       background: props.data.color,
       list: props.data,
-      // background: 'rgba(243,249,251,.5)',
       isEditing: false,
       categoryName: '',
     }
   }
 
+//Add an item
   handleSubmit = async (e) => {
     // e.preventDefault();
     // console.log(this.state.category, this.state.name)
@@ -110,17 +106,20 @@ class List extends Component {
   }
 
   //Delete Category
-  deleteCategory = async (e, itemID) => {
-    console.log(itemID);
-    const deleteCategory = await fetch('http://localhost:9000/' + itemID, {
-      method: 'DELETE',
+  deleteCategory = async (e, itemID, name) => {
+    e.preventDefault();
+    const deleteCategory = await fetch('http://localhost:9000/deleteCategory', {
+      method: 'POST',
       credentials: 'include',
+      body: JSON.stringify({id: itemID, name: this.state.list.name, category: name}),
       headers: {
         'Content-Type': 'application/json'
       }
     });
     const responseList = await deleteCategory.json();
-    await  console.log(deleteCategory, '56789');
+    await this.setState({
+      list: responseList.data
+    })
   }
 
 //Updating state for adding Category function in CreateCategory component
@@ -189,15 +188,16 @@ class List extends Component {
           <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
           <Tooltip title='Delete List' placement="top">
             <Close
-              onClick={e => this.deleteCategory(e, item._id)}
+              onClick={e => this.deleteCategory(e, item._id, item.name)}
               className='cancel'
             />
           </Tooltip>
         </div>
-          <form>
+          <form onSubmit={this.handleSubmit} style={{ display: 'flex' }}>
             <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
+            <button className='addItemButton'> + </button>
           </form>
-
+          <hr />
       </div>
   )
 
