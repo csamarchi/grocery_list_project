@@ -19,7 +19,8 @@
   margin: 10px;
   overflow: auto;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  background-color: #d5d9de;
+  background-color: #ebecf0;
+  border-radius: 10px;
 }
 
 /* form {

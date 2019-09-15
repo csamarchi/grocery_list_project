@@ -24,7 +24,7 @@ class List extends Component {
 
 //Add an item
   handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     // console.log(this.state.category, this.state.name)
     // let data = this.state.list;
     // let category = this.state.category;
@@ -38,6 +38,10 @@ class List extends Component {
           'Content-Type': 'application/json'
         }
       });
+      let itemResponse = await itemResponse.json();
+      this.setState({
+        list: itemResponse.data
+      })
     } catch(err) {
       console.log(err);
     }
