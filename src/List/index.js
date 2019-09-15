@@ -109,21 +109,40 @@ class List extends Component {
       })
   }
 
-  //Delete Category
   deleteCategory = async (e, itemID) => {
-    console.log(itemID);
-    const deleteCategory = await fetch('http://localhost:9000/deleteCategory/' + itemID, {
-      method: 'DELETE',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const responseList = await deleteCategory.json();
-    await  console.log(deleteCategory, '56789');
+    console.log(itemID)
+    try {
+      const getItem = await fetch('http://localhost:9000/deleteCategory/' + itemID, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const getItemJson = getItem.json()
+      return getItemJson;
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-//Updating state for adding Category function in CreateCategory component
+  // //Delete Category
+  // deleteCategory = async (e, itemID) => {
+  //   console.log(itemID);
+  //   let id = {id: itemID};
+  //   const deleteCategory = await fetch('http://localhost:9000/deleteCategory/' + itemID, {
+  //     method: 'POST',
+  //     credentials: 'include',
+  //     body: JSON.stringify(id),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  //   const responseList = await deleteCategory.json();
+  //   console.log(responseList, 'RESPONSE')
+  //   //await  console.log(deleteCategory, '56789');
+  // }
+
   updateState = (data) => {
     this.setState({
       list: data
@@ -162,6 +181,7 @@ class List extends Component {
     this.setState({ background: color.hex });
   };
 
+
   handleUpdate = async (color) => {
     const data = {
       color: this.state.background,
@@ -180,7 +200,7 @@ class List extends Component {
 
 
   render() {
-    //console.log(this.state, '456789');
+    console.log(this.state, '456789');
     const data = this.state.list.categories;
     // console.log(data, 'DATTAATATATATATA')
     let categoryList = data.map((item, key) =>
