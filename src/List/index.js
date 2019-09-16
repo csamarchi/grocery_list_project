@@ -15,20 +15,24 @@ class List extends Component {
       // category: '',
       name: '',
       _id: this.props.data._id,
-      // list: {
-      //   categories: [ {name: ''} ],
-      //   name: this.props.data.name,
-      // },
       background: props.data.color,
       list: props.data,
-      // background: 'rgba(243,249,251,.5)',
       isEditing: false,
       categoryName: '',
     }
   }
 
-  handleSubmit = async (e) => {
-    // e.preventDefault();
+//Add an item
+  handleSubmit = async (e, name, id) => {
+    e.preventDefault();
+    console.log(name, id, 'name id')
+
+    let reqData = {
+      listID: this.state._id,
+      categoryID: id,
+      item: this.state.name
+    }
+
     // console.log(this.state.category, this.state.name)
     // let data = this.state.list;
     // let category = this.state.category;
@@ -37,11 +41,16 @@ class List extends Component {
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(reqData),
         headers: {
           'Content-Type': 'application/json'
         }
       });
+      let itemResponse = await addItem.json();
+      console.log(itemResponse, 'item response')
+      await this.setState({
+              list: itemResponse.data
+            })
     } catch(err) {
       console.log(err);
     }
@@ -109,21 +118,21 @@ class List extends Component {
       })
   }
 
-  deleteCategory = async (e, itemID) => {
-    console.log(itemID)
-    try {
-      const getItem = await fetch('http://localhost:9000/deleteCategory/' + itemID, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const getItemJson = getItem.json()
-      return getItemJson;
-    } catch(err) {
-      console.log(err);
-    }
+  //Delete Category
+  deleteCategory = async (e, itemID, name) => {
+    e.preventDefault();
+    const deleteCategory = await fetch('http://localhost:9000/deleteCategory', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({id: itemID, name: this.state.list.name, category: name}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const responseList = await deleteCategory.json();
+    await this.setState({
+      list: responseList.data
+    })
   }
 
   // //Delete Category
@@ -205,19 +214,21 @@ class List extends Component {
     // console.log(data, 'DATTAATATATATATA')
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
+      {console.log(item, '12')}
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
           <Tooltip title='Delete List' placement="top">
             <Close
-              onClick={e => this.deleteCategory(e, item._id)}
+              onClick={e => this.deleteCategory(e, item._id, item.name)}
               className='cancel'
             />
           </Tooltip>
         </div>
-          <form>
+          <form onSubmit={(e) => this.handleSubmit(e, item.name, item._id)} style={{ display: 'flex' }}>
             <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
+            <button className='addItemButton'> + </button>
           </form>
-
+          <hr />
       </div>
   )
 
