@@ -223,7 +223,16 @@ class List extends Component {
           </form>
           <hr />
           {item.items.map((item, key) =>
-            <h1 style={{ textTransform: 'capitalize'}} key={key}> {item} </h1>
+            <div style={{ display: 'flex' }} key={key}>
+              <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
+              <Tooltip title='Delete Item' placement="top">
+                <Close
+                  onClick={this.handleDeleteItem}
+                  className='cancel'
+                  style={{fontSize: '1.1rem', marginLeft: '3px'}}
+                />
+              </Tooltip>
+            </div>
           )}
       </div>
   )
