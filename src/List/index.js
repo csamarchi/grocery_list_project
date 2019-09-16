@@ -23,8 +23,16 @@ class List extends Component {
   }
 
 //Add an item
-  handleSubmit = async (e) => {
+  handleSubmit = async (e, name, id) => {
     e.preventDefault();
+    console.log(name, id, 'name id')
+
+    let reqData = {
+      listID: this.state._id,
+      categoryID: id,
+      item: this.state.name
+    }
+
     // console.log(this.state.category, this.state.name)
     // let data = this.state.list;
     // let category = this.state.category;
@@ -33,20 +41,16 @@ class List extends Component {
       const addItem = fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(reqData),
         headers: {
           'Content-Type': 'application/json'
         }
       });
-       addItem.then((data) => {
-         console.log(data, 'data')
-         this.setState({
-           list: data.data
-         })
-       })
-
-
-
+      let itemResponse = await addItem.json();
+      console.log(itemResponse, 'item response')
+      await this.setState({
+              list: itemResponse.data
+            })
     } catch(err) {
       console.log(err);
     }
@@ -131,7 +135,23 @@ class List extends Component {
     })
   }
 
-//Updating state for adding Category function in CreateCategory component
+  // //Delete Category
+  // deleteCategory = async (e, itemID) => {
+  //   console.log(itemID);
+  //   let id = {id: itemID};
+  //   const deleteCategory = await fetch('http://localhost:9000/deleteCategory/' + itemID, {
+  //     method: 'POST',
+  //     credentials: 'include',
+  //     body: JSON.stringify(id),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  //   const responseList = await deleteCategory.json();
+  //   console.log(responseList, 'RESPONSE')
+  //   //await  console.log(deleteCategory, '56789');
+  // }
+
   updateState = (data) => {
     this.setState({
       list: data
@@ -170,6 +190,7 @@ class List extends Component {
     this.setState({ background: color.hex });
   };
 
+
   handleUpdate = async (color) => {
     const data = {
       color: this.state.background,
@@ -188,11 +209,12 @@ class List extends Component {
 
 
   render() {
-    //console.log(this.state, '456789');
+    console.log(this.state, '456789');
     const data = this.state.list.categories;
     // console.log(data, 'DATTAATATATATATA')
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
+      {console.log(item, '12')}
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
           <Tooltip title='Delete List' placement="top">
@@ -202,7 +224,7 @@ class List extends Component {
             />
           </Tooltip>
         </div>
-          <form onSubmit={this.handleSubmit} style={{ display: 'flex' }}>
+          <form onSubmit={(e) => this.handleSubmit(e, item.name, item._id)} style={{ display: 'flex' }}>
             <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
             <button className='addItemButton'> + </button>
           </form>
