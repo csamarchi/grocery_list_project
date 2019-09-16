@@ -30,7 +30,7 @@ class List extends Component {
     // let category = this.state.category;
     // data[category].push(this.state.name);
     try {
-      const addItem = await fetch('http://localhost:9000/addItem', {
+      const addItem = fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(this.state),
@@ -38,10 +38,15 @@ class List extends Component {
           'Content-Type': 'application/json'
         }
       });
-      let itemResponse = await itemResponse.json();
-      this.setState({
-        list: itemResponse.data
-      })
+       addItem.then((data) => {
+         console.log(data, 'data')
+         this.setState({
+           list: data.data
+         })
+       })
+
+
+
     } catch(err) {
       console.log(err);
     }
