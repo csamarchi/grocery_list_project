@@ -22,10 +22,9 @@ class List extends Component {
     }
   }
 
-//Add an item
+  //Add an item
   handleSubmit = async (e, name, id) => {
     e.preventDefault();
-    console.log(name, id, 'name id')
 
     let reqData = {
       listID: this.state._id,
@@ -33,12 +32,8 @@ class List extends Component {
       item: this.state.name
     }
 
-    // console.log(this.state.category, this.state.name)
-    // let data = this.state.list;
-    // let category = this.state.category;
-    // data[category].push(this.state.name);
     try {
-      const addItem = fetch('http://localhost:9000/addItem', {
+      const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(reqData),
@@ -47,7 +42,6 @@ class List extends Component {
         }
       });
       let itemResponse = await addItem.json();
-      console.log(itemResponse, 'item response')
       await this.setState({
               list: itemResponse.data
             })
@@ -209,12 +203,11 @@ class List extends Component {
 
 
   render() {
-    console.log(this.state, '456789');
+    // console.log(this.state, '456789');
     const data = this.state.list.categories;
-    // console.log(data, 'DATTAATATATATATA')
+    const items = this.state.list.categories.items;
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
-      {console.log(item, '12')}
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
           <Tooltip title='Delete List' placement="top">
@@ -229,8 +222,12 @@ class List extends Component {
             <button className='addItemButton'> + </button>
           </form>
           <hr />
+          {item.items.map((item, key) =>
+            <h1 style={{ textTransform: 'capitalize'}} key={key}> {item} </h1>
+          )}
       </div>
   )
+
 
     // let categoryList = Object.keys(data).splice(0, 9).map((item, idx) =>
     //       <div className='category' key={idx}>
@@ -288,19 +285,3 @@ class List extends Component {
 }
 
 export default List;
-
-// <div className='wrapper'>
-//   <form onSubmit={this.handleSubmit}>
-//     <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
-//     <div className="select">
-//       <select name='category' onChange={this.handleChange}>
-//         <option> Choose a category </option>
-//           {category}
-//       </select>
-//     </div>
-//     <button className='addItemButton'> + </button>
-//   </form>
-// </div>
-// <div className='categoryWrapper' style={{background: this.state.background}}>
-//     {categoryList}
-// </div>
