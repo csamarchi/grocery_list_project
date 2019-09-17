@@ -13,11 +13,10 @@
 }
 
 .category {
-  height: 270px;
-  width: 250px;
+  /* height: 270px; */
+  width: 300px;
   padding: 10px;
   margin: 10px;
-  overflow: auto;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   background-color: #ebecf0;
   border-radius: 10px;
@@ -241,4 +240,15 @@ h1 {
 hr {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.itemDivs {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(9,30,66,.25);
+  height: 30px;
+  padding: 6px;
+  margin: 5px;
 }

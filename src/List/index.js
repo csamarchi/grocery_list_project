@@ -82,7 +82,8 @@ class List extends Component {
 
 // send a fetch request to the server to remove a list item on onClick
 // invoke removeFromState with THREE arguments
-  deleteItem = async (item, id, category) => {
+  handleDeleteItem = async (item, id, category) => {
+    console.log(item, id, category);
     const sendData = {
       item: item,
       id: id,
@@ -128,23 +129,6 @@ class List extends Component {
       list: responseList.data
     })
   }
-
-  // //Delete Category
-  // deleteCategory = async (e, itemID) => {
-  //   console.log(itemID);
-  //   let id = {id: itemID};
-  //   const deleteCategory = await fetch('http://localhost:9000/deleteCategory/' + itemID, {
-  //     method: 'POST',
-  //     credentials: 'include',
-  //     body: JSON.stringify(id),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   });
-  //   const responseList = await deleteCategory.json();
-  //   console.log(responseList, 'RESPONSE')
-  //   //await  console.log(deleteCategory, '56789');
-  // }
 
   updateState = (data) => {
     this.setState({
@@ -203,9 +187,8 @@ class List extends Component {
 
 
   render() {
-    // console.log(this.state, '456789');
+    console.log(this.state, '456789');
     const data = this.state.list.categories;
-    const items = this.state.list.categories.items;
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -223,11 +206,11 @@ class List extends Component {
           </form>
           <hr />
           {item.items.map((item, key) =>
-            <div style={{ display: 'flex' }} key={key}>
+            <div className='itemDivs' key={key}>
               <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
               <Tooltip title='Delete Item' placement="top">
                 <Close
-                  onClick={this.handleDeleteItem}
+                  onClick={() => this.handleDeleteItem(item, this.state._id, item._id)}
                   className='cancel'
                   style={{fontSize: '1.1rem', marginLeft: '3px'}}
                 />
