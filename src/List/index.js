@@ -136,6 +136,26 @@ class List extends Component {
     })
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    //console.log(this.state, 'worked');
+    try {
+      const addedCategory = await fetch('http://localhost:9000/addCategory', {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(this.state),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      let categoryResponse = await addedCategory.json();
+      await this.props.updateState(categoryResponse.data)
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   handleEdit = async (e) => {
     e.preventDefault();
     const data = {
