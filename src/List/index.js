@@ -116,16 +116,19 @@ class List extends Component {
   //Delete Category
   deleteCategory = async (e, itemID, name) => {
     e.preventDefault();
+
+    let data = {id: itemID, name: this.state.list.name, category: name, listID: this.state._id};
+
     const deleteCategory = await fetch('http://localhost:9000/deleteCategory', {
       method: 'POST',
       credentials: 'include',
-      body: JSON.stringify({id: itemID, name: this.state.list.name, category: name}),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
       }
     });
     const responseList = await deleteCategory.json();
-    await this.setState({
+    this.setState({
       list: responseList.data
     })
   }
