@@ -116,9 +116,12 @@ class List extends Component {
   //Delete Category
   deleteCategory = async (e, itemID, name) => {
     e.preventDefault();
-
-    let data = {id: itemID, name: this.state.list.name, category: name, listID: this.state._id};
-
+    let data = {
+                id: itemID,
+                name: this.state.list.name,
+                category: name,
+                listID: this.state._id
+              };
     const deleteCategory = await fetch('http://localhost:9000/deleteCategory', {
       method: 'POST',
       credentials: 'include',
@@ -137,26 +140,6 @@ class List extends Component {
     this.setState({
       list: data
     })
-  }
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    //console.log(this.state, 'worked');
-    try {
-      const addedCategory = await fetch('http://localhost:9000/addCategory', {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify(this.state),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      let categoryResponse = await addedCategory.json();
-      await this.props.updateState(categoryResponse.data)
-
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   handleEdit = async (e) => {
@@ -210,7 +193,7 @@ class List extends Component {
 
 
   render() {
-    console.log(this.state, '456789');
+    //console.log(this.state, '456789');
     const data = this.state.list.categories;
     let categoryList = data.map((item, key) =>
       <div className='category' key={key}>
