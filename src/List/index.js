@@ -82,14 +82,15 @@ class List extends Component {
 
 // send a fetch request to the server to remove a list item on onClick
 // invoke removeFromState with THREE arguments
-  handleDeleteItem = async (item, id, category) => {
-    console.log(item, id, category);
+  handleDeleteItem = async (item, list, catId, categoryIndex, categoryItemIndex) => {
     const sendData = {
       item: item,
-      id: id,
-      category: category
+      list: list,
+      catId: catId,
+      categoryIndex: categoryIndex,
+      categoryItemIndex: categoryItemIndex,
     };
-    this.removeFromState(item, id, category)
+    this.removeFromState(item, list, catId, categoryIndex, categoryItemIndex)
     const deleteItem = await fetch('http://localhost:9000/deleteItem', {
       method: 'POST',
       credentials: 'include',
@@ -101,13 +102,17 @@ class List extends Component {
   }
 
   // Remove list item onClick from the client side
-  removeFromState = (item, id, category) => {
-    for (let key in this.state.list) {
-        if(key === category) {
-          let index = this.state.list[key].indexOf(item);
-          this.state.list[key].splice(index, 1);
-        }
-      }
+  removeFromState = (item, id, category, categoryIndex, categoryItemIndex) => {
+    console.log(item, id, category, categoryIndex);
+    let categories = this.state.list.categories;
+    categories[categoryIndex].items.splice(categoryItemIndex, 1)
+    console.log(categories);
+    // for (let key in this.state.list) {
+    //     if(key === category) {
+    //       let index = this.state.list[key].indexOf(item);
+    //       this.state.list[key].splice(index, 1);
+    //     }
+    //   }
       this.setState({
         count: 'rerender'
       })
@@ -193,10 +198,10 @@ class List extends Component {
 
 
   render() {
-    //console.log(this.state, '456789');
+    console.log(this.state, '456789');
     const data = this.state.list.categories;
-    let categoryList = data.map((item, key) =>
-      <div className='category' key={key}>
+    let categoryList = data.map((item, i) =>
+      <div className='category' key={i}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
           <Tooltip title='Delete List' placement="top">
@@ -211,12 +216,12 @@ class List extends Component {
             <button className='addItemButton'> + </button>
           </form>
           <hr />
-          {item.items.map((item, key) =>
+          {item.items.map((listItem, key) =>
             <div className='itemDivs' key={key}>
-              <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
+              <h1 style={{ textTransform: 'capitalize'}}> {listItem} </h1>
               <Tooltip title='Delete Item' placement="top">
                 <Close
-                  onClick={() => this.handleDeleteItem(item, this.state._id, item._id)}
+                  onClick={() => this.handleDeleteItem(listItem, this.state._id, item._id, key, i)}
                   className='cancel'
                   style={{fontSize: '1.1rem', marginLeft: '3px'}}
                 />
