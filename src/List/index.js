@@ -82,15 +82,16 @@ class List extends Component {
 
 // send a fetch request to the server to remove a list item on onClick
 // invoke removeFromState with THREE arguments
-  handleDeleteItem = async (item, list, catId, categoryIndex, categoryItemIndex) => {
+  handleDeleteItem = async (item, list, catId, categoryItemIndex, categoryIndex) => {
     const sendData = {
       item: item,
       list: list,
       catId: catId,
       categoryIndex: categoryIndex,
       categoryItemIndex: categoryItemIndex,
+      categories: this.state.list.categories
     };
-    this.removeFromState(item, list, catId, categoryIndex, categoryItemIndex)
+    this.removeFromState(item, list, catId, categoryItemIndex, categoryIndex)
     const deleteItem = await fetch('http://localhost:9000/deleteItem', {
       method: 'POST',
       credentials: 'include',
@@ -103,16 +104,8 @@ class List extends Component {
 
   // Remove list item onClick from the client side
   removeFromState = (item, id, category, categoryIndex, categoryItemIndex) => {
-    console.log(item, id, category, categoryIndex);
     let categories = this.state.list.categories;
     categories[categoryIndex].items.splice(categoryItemIndex, 1)
-    console.log(categories);
-    // for (let key in this.state.list) {
-    //     if(key === category) {
-    //       let index = this.state.list[key].indexOf(item);
-    //       this.state.list[key].splice(index, 1);
-    //     }
-    //   }
       this.setState({
         count: 'rerender'
       })
@@ -221,7 +214,7 @@ class List extends Component {
               <h1 style={{ textTransform: 'capitalize'}}> {listItem} </h1>
               <Tooltip title='Delete Item' placement="top">
                 <Close
-                  onClick={() => this.handleDeleteItem(listItem, this.state._id, item._id, key, i)}
+                  onClick={() => this.handleDeleteItem(listItem, this.state._id, item._id, i, key)}
                   className='cancel'
                   style={{fontSize: '1.1rem', marginLeft: '3px'}}
                 />
