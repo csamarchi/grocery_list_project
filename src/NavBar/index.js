@@ -25,16 +25,32 @@ export default class Example extends React.Component {
   render() {
     return (
       <div>
-        <Navbar style={{height: '40px'}}  color="light" light expand="md">
-          <NavbarBrand href="/">grocery list</NavbarBrand>
+        <Navbar style={{height: '40px'}}  color="dark" light expand="md">
+          <NavbarBrand style={{ color: 'white' }} href="/">grocery list</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/create" style={{fontSize: '1.5em'}}> + </NavLink>
+                <NavLink
+                  href="/create"
+                  style={{
+                    fontSize: '1.5em',
+                    color: 'white'
+                  }}
+                  >
+                  +
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/landing" style={{fontSize: '1em', marginTop: '8px'}}> Your Lists </NavLink>
+                <NavLink
+                  href="/landing"
+                  style={{
+                    fontSize: '1em',
+                    marginTop: '8px',
+                    color: 'white',
+                  }}>
+                  Your Lists
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>

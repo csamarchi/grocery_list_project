@@ -50,7 +50,7 @@ class LandingPage extends Component {
 
 
     return(
-      <div>
+      <div style={{ backgroundColor: '#ebecf0', height: '900px' }}>
         <NavBar />
         <DisplayLists lists={this.state.lists} />
       </div>

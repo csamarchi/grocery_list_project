@@ -12,7 +12,6 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state={
-      // category: '',
       name: '',
       _id: this.props.data._id,
       background: props.data.color,
@@ -25,13 +24,11 @@ class List extends Component {
   //Add an item
   handleSubmit = async (e, name, id) => {
     e.preventDefault();
-
     let reqData = {
       listID: this.state._id,
       categoryID: id,
       item: this.state.name
     }
-
     try {
       const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
@@ -106,9 +103,9 @@ class List extends Component {
   removeFromState = (item, id, category, categoryIndex, categoryItemIndex) => {
     let categories = this.state.list.categories;
     categories[categoryIndex].items.splice(categoryItemIndex, 1)
-      this.setState({
-        count: 'rerender'
-      })
+    this.setState({
+      count: 'rerender'
+    })
   }
 
   //Delete Category
@@ -191,7 +188,7 @@ class List extends Component {
 
 
   render() {
-    console.log(this.state, '456789');
+    //console.log(this.state, '456789');
     const data = this.state.list.categories;
     let categoryList = data.map((item, i) =>
       <div className='category' key={i}>
@@ -223,29 +220,6 @@ class List extends Component {
           )}
       </div>
   )
-
-
-    // let categoryList = Object.keys(data).splice(0, 9).map((item, idx) =>
-    //       <div className='category' key={idx}>
-    //         <h1 style={{ textTransform: 'capitalize'}}> {item} </h1>
-    //         <div className='itemWraper'>
-    //           {data[item].map((value) =>
-    //             <div key={value} style={{display: 'flex'}}>
-    //               <p className='item'> {value} </p>
-    //               <button
-    //                 className='deleteButton'
-    //                 item={value} id={this.state._id}
-    //                 onClick={() => this.deleteItem(value, this.state._id, item)}>
-    //                   X
-    //               </button>
-    //             </div>
-    //           )}
-    //         </div>
-    //       </div>
-    //     )
-    // let category = Object.keys(data).splice(0, 9).map((item) =>
-    //   <option key={item} value={item}>{item}</option>
-    // )
 
     return(
       <div className='background' style={{background: this.state.background}}>
