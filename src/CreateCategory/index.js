@@ -32,7 +32,9 @@ class CreateList extends Component {
       });
       let categoryResponse = await addedCategory.json();
       await this.props.updateState(categoryResponse.data)
-
+      this.setState({
+        name: '',
+      })
     } catch (err) {
       console.log(err);
     }

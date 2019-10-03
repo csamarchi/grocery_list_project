@@ -6,6 +6,7 @@ import ColorPicker from './color.js';
 import CreateCategory from '../CreateCategory';
 import Close from '@material-ui/icons/Close';
 import { Tooltip } from '@material-ui/core';
+import Categories from './categories.js';
 
 class List extends Component {
 
@@ -16,40 +17,15 @@ class List extends Component {
       _id: this.props.data._id,
       background: props.data.color,
       list: props.data,
-      isEditing: false, 
+      isEditing: false,
       categoryName: '',
     }
   }
 
-  //Add an item
-  handleSubmit = async (e, name, id) => {
-    e.preventDefault();
-    console.log(e.target,'121212')
-    let reqData = {
-      listID: this.state._id,
-      categoryID: id,
-      item: this.state.name
-    }
-    try {
-      const addItem = await fetch('http://localhost:9000/addItem', {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify(reqData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      let itemResponse = await addItem.json();
-      await this.setState({
-              list: itemResponse.data
-            })
-    } catch(err) {
-      console.log(err);
-    }
-  }
 
   handleChange = (e) => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value })
+    e.currentTarget.name = ''
   }
 
   getList = async () => {
@@ -78,37 +54,6 @@ class List extends Component {
     })
   }
 
-// send a fetch request to the server to remove a list item on onClick
-// invoke removeFromState with THREE arguments
-  handleDeleteItem = async (item, list, catId, categoryItemIndex, categoryIndex) => {
-    const sendData = {
-      item: item,
-      list: list,
-      catId: catId,
-      categoryIndex: categoryIndex,
-      categoryItemIndex: categoryItemIndex,
-      categories: this.state.list.categories
-    };
-    this.removeFromState(item, list, catId, categoryItemIndex, categoryIndex)
-    const deleteItem = await fetch('http://localhost:9000/deleteItem', {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify(sendData),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-  }
-
-  // Remove list item onClick from the client side
-  removeFromState = (item, id, category, categoryIndex, categoryItemIndex) => {
-    let categories = this.state.list.categories;
-    categories[categoryIndex].items.splice(categoryItemIndex, 1)
-    this.setState({
-      count: 'rerender'
-    })
-  }
-
   //Delete Category
   deleteCategory = async (e, itemID, name) => {
     e.preventDefault();
@@ -134,7 +79,7 @@ class List extends Component {
 
   updateState = (data) => {
     this.setState({
-      list: data
+      list: data,
     })
   }
 
@@ -192,34 +137,13 @@ class List extends Component {
     //console.log(this.state, '456789');
     const data = this.state.list.categories;
     let categoryList = data.map((item, i) =>
-      <div className='category' key={i}>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <h1 style={{ textTransform: 'capitalize'}}><b> {item.name} </b></h1>
-          <Tooltip title='Delete List' placement="top">
-            <Close
-              onClick={e => this.deleteCategory(e, item._id, item.name)}
-              className='cancel'
-            />
-          </Tooltip>
-        </div>
-          <form onSubmit={(e) => this.handleSubmit(e, item.name, item._id)} style={{ display: 'flex' }}>
-            <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
-            <button className='addItemButton'> + </button>
-          </form>
-          <hr />
-          {item.items.map((listItem, key) =>
-            <div className='itemDivs' key={key}>
-              <h1 style={{ textTransform: 'capitalize'}}> {listItem} </h1>
-              <Tooltip title='Delete Item' placement="top">
-                <Close
-                  onClick={() => this.handleDeleteItem(listItem, this.state._id, item._id, i, key)}
-                  className='cancel'
-                  style={{fontSize: '1.1rem', marginLeft: '3px'}}
-                />
-              </Tooltip>
-            </div>
-          )}
-      </div>
+      <Categories
+        item={item}
+        i={i}
+        deleteCategory={this.deleteCategory}
+        _id={this.state._id}
+        key={i}
+      />
   )
 
     return(
