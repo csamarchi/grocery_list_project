@@ -43,7 +43,7 @@ export default class Example extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="/landing"
+                  href="/"
                   style={{
                     fontSize: '1em',
                     marginTop: '8px',

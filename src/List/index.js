@@ -16,7 +16,7 @@ class List extends Component {
       _id: this.props.data._id,
       background: props.data.color,
       list: props.data,
-      isEditing: false,
+      isEditing: false, 
       categoryName: '',
     }
   }
@@ -24,6 +24,7 @@ class List extends Component {
   //Add an item
   handleSubmit = async (e, name, id) => {
     e.preventDefault();
+    console.log(e.target,'121212')
     let reqData = {
       listID: this.state._id,
       categoryID: id,
