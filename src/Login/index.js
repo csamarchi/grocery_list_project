@@ -28,7 +28,7 @@ class Login extends Component {
       console.log(parsedResponse, 'this is our parsed data at login');
 
         if(parsedResponse.data === 'login successful') {
-          this.props.history.push('/create');
+          this.props.history.push('/');
 
         } else if(parsedResponse.data === 'login unsuccessful'){
           alert('Password Incorrect')

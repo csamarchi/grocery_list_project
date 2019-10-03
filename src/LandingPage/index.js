@@ -25,7 +25,15 @@ class LandingPage extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-      this.setState({lists: list.data})
+      // If the response says log in required
+      if (list.data === 'Log in required') {
+        // push them to the login page
+        this.props.history.push('/login');
+        // or else
+      } else {
+        // render the landing page for the user
+        this.setState({lists: list.data})
+      }
     }).catch((err) => {
       console.log(err);
     })
