@@ -16,15 +16,14 @@ class List extends Component {
       _id: this.props.data._id,
       background: props.data.color,
       list: props.data,
-      isEditing: false, 
+      isEditing: false,
       categoryName: '',
     }
   }
 
   //Add an item
-  handleSubmit = async (e, name, id) => {
+  handleSubmit = async (e, name, id, i) => {
     e.preventDefault();
-    console.log(e.target,'121212')
     let reqData = {
       listID: this.state._id,
       categoryID: id,
@@ -40,9 +39,11 @@ class List extends Component {
         }
       });
       let itemResponse = await addItem.json();
-      await this.setState({
-              list: itemResponse.data
+      this.setState({
+              list: itemResponse.data,
+              name: ''
             })
+      this.handleChange(e);
     } catch(err) {
       console.log(err);
     }
@@ -50,6 +51,7 @@ class List extends Component {
 
   handleChange = (e) => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value })
+    e.currentTarget.name = ''
   }
 
   getList = async () => {
@@ -134,7 +136,7 @@ class List extends Component {
 
   updateState = (data) => {
     this.setState({
-      list: data
+      list: data,
     })
   }
 
@@ -202,8 +204,18 @@ class List extends Component {
             />
           </Tooltip>
         </div>
-          <form onSubmit={(e) => this.handleSubmit(e, item.name, item._id)} style={{ display: 'flex' }}>
-            <input className='addItemInput' type='text' name='name' placeholder='your item..' onChange={this.handleChange}/>
+          <form
+            onSubmit={(e) => this.handleSubmit(e, item.name, item._id, i)}
+            style={{ display: 'flex' }}
+          >
+            <input
+              className='addItemInput'
+              type='text'
+              value={this.state.name}
+              name='name'
+              placeholder='your item..'
+              onChange={this.handleChange}
+            />
             <button className='addItemButton'> + </button>
           </form>
           <hr />
