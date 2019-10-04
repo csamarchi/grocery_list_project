@@ -7,15 +7,16 @@
 }
 
 .collaborators {
-  width: 100px;
+  width: 200px;
   height: 100px;
-  border: 2px solid red;
 }
+
 .possibleCollab {
   margin-left: 5%;
   background-color: #343A40;
   color: white;
 }
+
 .collaboratorsWrap {
   display: flex;
   justify-content: space-between;
@@ -215,7 +216,7 @@ p {
   display: inline-block;
   cursor: pointer;
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 30px;
 }
 
 .colorWrapper {

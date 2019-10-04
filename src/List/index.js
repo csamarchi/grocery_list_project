@@ -5,8 +5,15 @@ import Edit from '@material-ui/icons/Edit';
 import ColorPicker from './color.js';
 import CreateCategory from '../CreateCategory';
 import Close from '@material-ui/icons/Close';
-import { Tooltip } from '@material-ui/core';
 import Categories from './categories.js';
+import Button from "@material-ui/core/Button";
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
+
 
 class List extends Component {
 
@@ -27,7 +34,6 @@ class List extends Component {
 
   handleChange = (e) => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value })
-    console.log(this.state)
   }
 
   getList = async () => {
@@ -184,7 +190,7 @@ class List extends Component {
         _id={this.state._id}
         key={i}
       />
-  ) 
+  )
 
     return(
       <div className='background' style={{background: this.state.background}}>
@@ -203,23 +209,34 @@ class List extends Component {
         </div>
         <div className='collaboratorsWrap'>
           <div className='collaborators'>
-            <form onSubmit={this.searchCollaborators}>
-              <input onChange={this.handleChange} type='text' name='name' placeholder='search collaborators' className='collabInput' />
-               { this.state.collab ? 
-                this.state.collabs.map((item)=> {
-                  return(
-                  <div className='possibleCollab' onClick={(e) => this.handleConfirmCollab(e, item.username)} >{item.username}</div>
-                  )
-                }) : null
-               } 
-            </form>
+            <FormControl onSubmit={this.searchCollaborators}>
+              <InputLabel htmlFor="input-with-icon-adornment">Add collaborators</InputLabel>
+               <Input
+                 onChange={this.handleChange}
+                 id="input-with-icon-adornment"
+                 name='name'
+                 startAdornment={
+                   <InputAdornment position="start">
+                     <AccountCircle />
+                   </InputAdornment>
+                 }
+               />
+               <Button type='submit'> search </Button>
+                { this.state.collab ?
+                 this.state.collabs.map((item)=> {
+                   return(
+                   <div className='possibleCollab' onClick={(e) => this.handleConfirmCollab(e, item.username)} >{item.username}</div>
+                   )
+                 }) : null
+                }
+             </FormControl>
           </div>
           <ColorPicker
             handleUpdate={this.handleUpdate}
             onChange={this.handleColorChange}
           />
         </div>
-        
+
           <CreateCategory
             list={this.state.list}
             id={this.state._id}
