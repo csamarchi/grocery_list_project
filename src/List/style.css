@@ -6,6 +6,23 @@
   height: 100vh;
 }
 
+.collaborators {
+  width: 100px;
+  height: 100px;
+  border: 2px solid red;
+}
+.possibleCollab {
+  margin-left: 5%;
+  background-color: #343A40;
+  color: white;
+}
+.collaboratorsWrap {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin: 0 6px;
+}
+
 .title {
   display: flex;
   align-items: baseline;

@@ -21,7 +21,8 @@ class Categories extends Component {
     let reqData = {
       listID: this.props._id,
       categoryID: id,
-      item: this.state.name
+      item: this.state.name,
+      categoryIndex: i
     }
     try {
       const addItem = await fetch('http://localhost:9000/addItem', {
@@ -33,7 +34,6 @@ class Categories extends Component {
         }
       });
       let itemResponse = await addItem.json();
-      console.log(itemResponse);
       this.setState({
               item: itemResponse.data,
               name: ''
@@ -50,7 +50,6 @@ class Categories extends Component {
   // send a fetch request to the server to remove a list item on onClick
   // invoke removeFromState with THREE arguments
     handleDeleteItem = async (item, list, catId, categoryItemIndex, categoryIndex) => {
-      console.log(list);
       const sendData = {
         item: item,
         list: list,
@@ -59,27 +58,20 @@ class Categories extends Component {
         categoryItemIndex: categoryItemIndex,
         categories: this.state.item.items
       };
-      this.removeFromState(item, list, catId, categoryItemIndex, categoryIndex)
-      const deleteItem = await fetch('http://localhost:9000/deleteItem', {
+      let deleteItem = await fetch('http://localhost:9000/deleteItem', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(sendData),
         headers: {
           'Content-Type': 'application/json'
         }
+      });
+      let deleteItemResponse = await deleteItem.json();
+      await this.setState({
+        item: deleteItemResponse.data
       })
     }
 
-    // Remove list item onClick from the client side
-    removeFromState = (item, id, category, categoryIndex, categoryItemIndex) => {
-      console.log(category, categoryIndex, categoryItemIndex);
-      let categories = this.state.item;
-      console.log(categories);
-      categories.items.splice(categoryItemIndex, 1)
-      this.setState({
-        count: 'rerender'
-      })
-    }
 
   render() {
     let item = this.state.item;
@@ -116,8 +108,8 @@ class Categories extends Component {
               <div className='itemDivs' key={key}>
                 <h1 style={{ textTransform: 'capitalize'}}> {listItem} </h1>
                 <Tooltip title='Delete Item' placement="top">
-                  <Close
-                    onClick={() => this.handleDeleteItem(listItem, this.props._id, item._id, i, key)}
+                  <Close                               /* item, list, catId, categoryItemIndex, categoryIndex */
+                    onClick={() => this.handleDeleteItem(listItem, this.props._id, item._id, key, i)}
                     className='cancel'
                     style={{fontSize: '1.1rem', marginLeft: '3px'}}
                   />

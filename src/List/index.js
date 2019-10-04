@@ -19,13 +19,15 @@ class List extends Component {
       list: props.data,
       isEditing: false,
       categoryName: '',
+      username: '',
+      collab: false
     }
   }
 
 
   handleChange = (e) => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value })
-    e.currentTarget.name = ''
+    console.log(this.state)
   }
 
   getList = async () => {
@@ -98,7 +100,6 @@ class List extends Component {
       }
     });
     const editResponse = await editList.json();
-    // console.log(editResponse);
     this.setState({
       list: {
         ...this.state.list,
@@ -132,6 +133,45 @@ class List extends Component {
     })
   }
 
+  searchCollaborators = async (e) => {
+    e.preventDefault();
+    console.log(this.state)
+    // try {
+      const searchCollaborators = await fetch('http://localhost:9000/collab', {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({name: this.state.name}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const searchCollaboratorsJson = await searchCollaborators.json()
+      await console.log(searchCollaboratorsJson, 'collab')
+
+      await this.setState({
+        collabs: searchCollaboratorsJson.data,
+        collab: true
+      })
+    //   // return searchCollaboratorsJson;
+    // } catch(err) {
+    //   console.log(err);
+    // }
+  }
+
+  handleConfirmCollab = async (e, username) => {
+    e.preventDefault();
+    const confirmCollaborators = await fetch('http://localhost:9000/confirmCollab', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({username: username, listID: this.state._id}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const confirmCollaboratorsJson = await confirmCollaborators.json()
+    await console.log(confirmCollaboratorsJson, 'collab')
+  }
+
 
   render() {
     //console.log(this.state, '456789');
@@ -144,7 +184,7 @@ class List extends Component {
         _id={this.state._id}
         key={i}
       />
-  )
+  ) 
 
     return(
       <div className='background' style={{background: this.state.background}}>
@@ -161,10 +201,25 @@ class List extends Component {
             </div> : null
           }
         </div>
+        <div className='collaboratorsWrap'>
+          <div className='collaborators'>
+            <form onSubmit={this.searchCollaborators}>
+              <input onChange={this.handleChange} type='text' name='name' placeholder='search collaborators' className='collabInput' />
+               { this.state.collab ? 
+                this.state.collabs.map((item)=> {
+                  return(
+                  <div className='possibleCollab' onClick={(e) => this.handleConfirmCollab(e, item.username)} >{item.username}</div>
+                  )
+                }) : null
+               } 
+            </form>
+          </div>
           <ColorPicker
             handleUpdate={this.handleUpdate}
             onChange={this.handleColorChange}
           />
+        </div>
+        
           <CreateCategory
             list={this.state.list}
             id={this.state._id}
