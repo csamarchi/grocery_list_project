@@ -27,11 +27,29 @@ class DisplayLists extends Component {
 
 
   render() {
-
+    console.log(this.props, 'props')
     const showList = this.props.lists.map((item, i) => {
       //console.log(this.props.lists);
       return (
         <div key={item._id} className='listDiv' style={{ backgroundColor: `${this.props.lists[i].color}` }}>
+          <h4> {item.name} </h4>
+          <Link to ={'/' + item._id}>
+          <button className='deleteListButton'>View</button>
+          </Link>
+          <button
+            className='deleteListButton'
+            itemID={item._id}
+            onClick={e => this.handleClick(e, item._id)}>
+              Delete List
+          </button>
+        </div>
+      )
+    })
+
+    const showCollabList = this.props.collabs.map((item, i) => {
+      //console.log(this.props.lists);
+      return (
+        <div key={item._id} className='listDiv' style={{ backgroundColor: `pink` }}>
           <h4> {item.name} </h4>
           <Link to ={'/' + item._id}>
           <button className='deleteListButton'>View</button>
@@ -51,6 +69,7 @@ class DisplayLists extends Component {
       <div>
         <div className='gridList'>
           {showList}
+          {showCollabList}
         </div>
       </div>
     )

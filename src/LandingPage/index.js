@@ -7,6 +7,7 @@ class LandingPage extends Component {
     super();
     this.state = {
       lists: [],
+      collabLists: []
     }
   }
 
@@ -25,6 +26,7 @@ class LandingPage extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
+      console.log(list)
       // If the response says log in required
       if (list.data === 'Log in required') {
         // push them to the login page
@@ -32,7 +34,10 @@ class LandingPage extends Component {
         // or else
       } else {
         // render the landing page for the user
-        this.setState({lists: list.data})
+        this.setState({
+          lists: list.data.foundLists,
+          collabLists: list.data.foundCollabs
+        })
       }
     }).catch((err) => {
       console.log(err);
@@ -55,12 +60,12 @@ class LandingPage extends Component {
 
   render() {
 
-
+    
 
     return(
       <div style={{ backgroundColor: '#ebecf0', height: '900px' }}>
         <NavBar />
-        <DisplayLists lists={this.state.lists} />
+        <DisplayLists lists={this.state.lists} collabs={this.state.collabLists} />
       </div>
     )
   }
