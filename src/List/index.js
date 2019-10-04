@@ -15,6 +15,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 
+
 class List extends Component {
 
   constructor(props) {
@@ -209,27 +210,29 @@ class List extends Component {
         </div>
         <div className='collaboratorsWrap'>
           <div className='collaborators'>
-            <FormControl onSubmit={this.searchCollaborators}>
-              <InputLabel htmlFor="input-with-icon-adornment">Add collaborators</InputLabel>
-               <Input
-                 onChange={this.handleChange}
-                 id="input-with-icon-adornment"
-                 name='name'
-                 startAdornment={
-                   <InputAdornment position="start">
-                     <AccountCircle />
-                   </InputAdornment>
-                 }
-               />
-               <Button type='submit'> search </Button>
-                { this.state.collab ?
-                 this.state.collabs.map((item)=> {
-                   return(
-                   <div className='possibleCollab' onClick={(e) => this.handleConfirmCollab(e, item.username)} >{item.username}</div>
-                   )
-                 }) : null
-                }
-             </FormControl>
+            <form onSubmit={this.searchCollaborators}>
+              <FormControl>
+                <InputLabel htmlFor="input-with-icon-adornment">Add collaborators</InputLabel>
+                <Input
+                  onChange={this.handleChange}
+                  id="input-with-icon-adornment"
+                  name='name'
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
+                />
+                <Button type='submit'> search </Button>
+                  { this.state.collab ?
+                  this.state.collabs.map((item)=> {
+                    return(
+                    <div className='possibleCollab' onClick={(e) => this.handleConfirmCollab(e, item.username)} >{item.username}</div>
+                    )
+                  }) : null
+                  }
+              </FormControl>
+            </form>
           </div>
           <ColorPicker
             handleUpdate={this.handleUpdate}
