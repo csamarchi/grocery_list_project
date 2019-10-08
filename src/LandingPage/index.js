@@ -7,7 +7,8 @@ class LandingPage extends Component {
     super();
     this.state = {
       lists: [],
-      collabLists: []
+      collabLists: [],
+      username: ''
     }
   }
 
@@ -26,7 +27,7 @@ class LandingPage extends Component {
 
   componentDidMount() {
     this.getList().then((list) => {
-      console.log(list)
+      //console.log(list)
       // If the response says log in required
       if (list.data === 'Log in required') {
         // push them to the login page
@@ -36,7 +37,8 @@ class LandingPage extends Component {
         // render the landing page for the user
         this.setState({
           lists: list.data.foundLists,
-          collabLists: list.data.foundCollabs
+          collabLists: list.data.foundCollabs,
+          username: list.data.username
         })
       }
     }).catch((err) => {
@@ -46,12 +48,11 @@ class LandingPage extends Component {
 
 //Delete Function
   deleteList = async (id) => {
-      console.log(id, ' this is id');
+      //console.log(id, ' this is id');
       const deleteListResponse = await fetch('http://localhost:9000/api/v1/list/' + id, {
           method: 'DELETE'
         });
       const deleteListParsed = await deleteListResponse.text();
-      console.log(deleteListParsed, 'deleted')
       this.setState({
         lists: this.state.lists.filter((oneList) => oneList._id !== id )
       })
@@ -59,12 +60,12 @@ class LandingPage extends Component {
 
 
   render() {
+    console.log(this.state);
 
-    
 
     return(
       <div style={{ backgroundColor: '#ebecf0', height: '900px' }}>
-        <NavBar />
+        <NavBar username={this.state.username} />
         <DisplayLists lists={this.state.lists} collabs={this.state.collabLists} />
       </div>
     )
