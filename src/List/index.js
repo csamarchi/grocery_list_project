@@ -223,14 +223,14 @@ class List extends Component {
                     </InputAdornment>
                   }
                 />
-                <Button type='submit'> search </Button>
-                  { this.state.collab ?
+                { this.state.collab ?
                   this.state.collabs.map((item)=> {
                     return(
                     <div className='possibleCollab' onClick={(e) => this.handleConfirmCollab(e, item.username)} >{item.username}</div>
                     )
                   }) : null
                   }
+                <Button type='submit'> search </Button>
               </FormControl>
             </form>
           </div>
