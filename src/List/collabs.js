@@ -30,7 +30,6 @@ class Collabs extends Component {
 
 
   render() {
-    console.log(this.props.collabs);
     return(
       <div>
       { this.state.collabSearch ?
@@ -57,7 +56,6 @@ class Collabs extends Component {
               </div>
               { this.props.collab ?
                 this.props.collabs.map((item, key)=> {
-                  console.log('hello', this.props.collabs);
                   return(
                   <div
                     key={key}

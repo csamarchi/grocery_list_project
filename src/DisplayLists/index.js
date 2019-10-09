@@ -21,13 +21,11 @@ class DisplayLists extends Component {
       }
     });
     const responseList = await deleteList.json();
-    await  console.log(responseList, '56789');
     this.props.history.push('/create');
   }
 
 
   render() {
-    console.log(this.props, 'props')
     const showList = this.props.lists.map((item, i) => {
       //console.log(this.props.lists);
       return (

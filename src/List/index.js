@@ -149,7 +149,7 @@ class List extends Component {
         }
       })
       const searchCollaboratorsJson = await searchCollaborators.json()
-      await console.log(searchCollaboratorsJson, 'collab')
+      // await console.log(searchCollaboratorsJson, 'collab')
 
       await this.setState({
         collabs: searchCollaboratorsJson.data,
@@ -180,7 +180,7 @@ class List extends Component {
 
 
   render() {
-    //console.log(this.props, '456789');
+    console.log(this.state, '456789');
     const data = this.state.list.categories;
     let categoryList = data.map((item, i) =>
       <Categories
@@ -191,6 +191,12 @@ class List extends Component {
         key={i}
       />
   )
+
+  let collabList = this.state.list.collabs.map((item) =>
+    <div>
+      <h1 style={{textIndent: '10px'}}> {item} </h1>
+    </div>
+)
 
     return(
       <div className='background' style={{background: this.state.background}}>
@@ -220,6 +226,10 @@ class List extends Component {
             onChange={this.handleColorChange}
           />
         </div>
+          <div className='collabsListDiv'>
+            <h1><b>Collaborators </b></h1>
+              {collabList}
+          </div>
           <CreateCategory
             list={this.state.list}
             id={this.state._id}
