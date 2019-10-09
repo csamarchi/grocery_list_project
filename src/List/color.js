@@ -24,16 +24,16 @@ class ColorPicker extends Component {
   render() {
     return(
       <div className='colorWrapper'>
-        <div className='swatch' onClick={ this.handleClick }>
-          <h1> Change background </h1>
-          <div className='color' />
-        </div>
         { this.state.displayColorPicker ?
           <div className='popover'>
             <CirclePicker onChangeComplete={ this.props.onChange } />
             <button className='saveColor' onClick={this.props.handleUpdate}> Save </button>
             <Close onClick={this.handleClose} className='cancel'/>
-          </div> : null
+          </div> :
+          <div className='swatch' onClick={ this.handleClick }>
+            <h1> Change background </h1>
+            <div className='color' />
+          </div>
         }
       </div>
     )

@@ -17,6 +17,16 @@
   color: white;
 }
 
+.collabAdd {
+  display: flex;
+  margin-top: 10px;
+}
+
+.addCircle:hover {
+  cursor: pointer;
+  color: #5d615d;
+}
+
 .collaboratorsWrap {
   display: flex;
   justify-content: space-between;
@@ -216,7 +226,7 @@ p {
   display: inline-block;
   cursor: pointer;
   border-radius: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .colorWrapper {
@@ -269,4 +279,15 @@ hr {
   height: 30px;
   padding: 6px;
   margin: 5px;
+}
+
+.collabAddBox {
+  width: 200px;
+  height: 40px;
+  background-color: grey;
+  cursor: pointer;
+  opacity: 0.5;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  margin: 10px;
+  text-align: center;
 }

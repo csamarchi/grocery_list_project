@@ -6,13 +6,7 @@ import ColorPicker from './color.js';
 import CreateCategory from '../CreateCategory';
 import Close from '@material-ui/icons/Close';
 import Categories from './categories.js';
-import Button from "@material-ui/core/Button";
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-
+import Collabs from './collabs.js';
 
 
 
@@ -28,7 +22,8 @@ class List extends Component {
       isEditing: false,
       categoryName: '',
       username: '',
-      collab: false
+      collab: false,
+      collabs: []
     }
   }
 
@@ -56,8 +51,9 @@ class List extends Component {
   componentDidMount() {
     this.getList().then((list) => {
       this.setState({
-                     background: list.data.color,
-                   })
+         background: list.data.color,
+         // collabs: list.data.collabs
+       })
     }).catch((err) => {
       console.log(err);
     })
@@ -170,7 +166,10 @@ class List extends Component {
     const confirmCollaborators = await fetch('http://localhost:9000/confirmCollab', {
       method: 'POST',
       credentials: 'include',
-      body: JSON.stringify({username: username, listID: this.state._id}),
+      body: JSON.stringify({
+        username: username,
+        listID: this.state._id,
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -181,7 +180,7 @@ class List extends Component {
 
 
   render() {
-    //console.log(this.state, '456789');
+    //console.log(this.props, '456789');
     const data = this.state.list.categories;
     let categoryList = data.map((item, i) =>
       <Categories
@@ -201,7 +200,7 @@ class List extends Component {
           { this.state.isEditing ?
             <div >
             <form onSubmit={this.handleEdit} style={{marginRight: '-320px'}}>
-              <input onChange={this.handleChange} type='text' name='name' placeholder='edit name' className='editInput' style={{ backgroundColor: `${this.state.background}`}}/>
+              <input onChange={this.handleChange} type='text' name='name' placeholder={this.state.list.name} className='editInput' style={{ backgroundColor: `${this.state.background}`}}/>
               <button className='saveColor' > Save </button>
               <Close onClick={this.toggleEdit} className='cancel'/>
             </form>
@@ -209,37 +208,18 @@ class List extends Component {
           }
         </div>
         <div className='collaboratorsWrap'>
-          <div className='collaborators'>
-            <form onSubmit={this.searchCollaborators}>
-              <FormControl>
-                <InputLabel htmlFor="input-with-icon-adornment">Add collaborators</InputLabel>
-                <Input
-                  onChange={this.handleChange}
-                  id="input-with-icon-adornment"
-                  name='name'
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <AccountCircle />
-                    </InputAdornment>
-                  }
-                />
-                { this.state.collab ?
-                  this.state.collabs.map((item)=> {
-                    return(
-                    <div className='possibleCollab' onClick={(e) => this.handleConfirmCollab(e, item.username)} >{item.username}</div>
-                    )
-                  }) : null
-                  }
-                <Button type='submit'> search </Button>
-              </FormControl>
-            </form>
-          </div>
+          <Collabs
+            searchCollaborators={this.searchCollaborators}
+            handleConfirmCollab={this.handleConfirmCollab}
+            handleChange={this.handleChange}
+            collab={this.state.collab}
+            collabs={this.state.collabs}
+          />
           <ColorPicker
             handleUpdate={this.handleUpdate}
             onChange={this.handleColorChange}
           />
         </div>
-
           <CreateCategory
             list={this.state.list}
             id={this.state._id}
