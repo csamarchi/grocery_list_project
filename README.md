@@ -2,7 +2,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # groceryList
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ![alt text](/public/login_screenshot.png)
 ------------------------------------------------------------------------------------------------------------------------------
@@ -10,7 +9,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ![alt text](/public/list_screenshot.png)
 
 
-HELLO
 
 
 ## Available Scripts
