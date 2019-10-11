@@ -60,7 +60,8 @@ class LandingPage extends Component {
 
 
   render() {
-
+    // console.log(this.props, 'props')
+    // this.props.history.push('/create')
 
     return(
       <div style={{ backgroundColor: '#ebecf0', height: '900px' }}>

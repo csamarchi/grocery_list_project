@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import {
   Navbar,
   NavbarToggler,
@@ -22,7 +23,21 @@ export default class Example extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
+  logout = async () => {
+    let logoutSession = await fetch('http://localhost:9000/auth/logout', {
+      credentials: 'include', 
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
+    let logoutSessionJson = await logoutSession.json();
+
+    await console.log(logoutSessionJson);
+
+    // await this.props.history.push('/');
+  }
 
   toggle() {
     this.setState({
@@ -31,6 +46,7 @@ export default class Example extends React.Component {
   }
 
   render() {
+    // console.log(this.props, 'props')
     return (
       <div>
         <Navbar style={{height: '40px'}}  color="dark" light expand="md">
@@ -72,7 +88,7 @@ export default class Example extends React.Component {
                 {this.props.username}
               </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem header>Logout</DropdownItem>
+                  <DropdownItem header><Link to='/logout'>Logout</Link></DropdownItem>
                 </DropdownMenu>
                 </Dropdown>
               </NavItem>
