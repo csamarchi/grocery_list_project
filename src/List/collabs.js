@@ -9,7 +9,6 @@ import FormControl from '@material-ui/core/FormControl';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AddCircle from '@material-ui/icons/AddCircle';
 
-
 class Collabs extends Component {
 
   constructor(props) {

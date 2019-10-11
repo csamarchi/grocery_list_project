@@ -7,7 +7,7 @@ import CreateCategory from '../CreateCategory';
 import Close from '@material-ui/icons/Close';
 import Categories from './categories.js';
 import Collabs from './collabs.js';
-
+import PersonIcon from '@material-ui/icons/Person';
 
 
 class List extends Component {
@@ -180,7 +180,7 @@ class List extends Component {
 
 
   render() {
-    console.log(this.state, '456789');
+    //console.log(this.state, '456789');
     const data = this.state.list.categories;
     let categoryList = data.map((item, i) =>
       <Categories
@@ -192,9 +192,10 @@ class List extends Component {
       />
   )
 
-  let collabList = this.state.list.collabs.map((item) =>
-    <div>
-      <h1 style={{textIndent: '10px'}}> {item} </h1>
+  let collabList = this.state.list.collabs.map((item, key) =>
+    <div style={{ display: 'flex' }} key={key}>
+      <PersonIcon />
+      <h1 style={{textIndent: '10px', lineHeight: '30px'}}> {item} </h1>
     </div>
 )
 
