@@ -175,7 +175,8 @@ class List extends Component {
       }
     })
     const confirmCollaboratorsJson = await confirmCollaborators.json()
-    await console.log(confirmCollaboratorsJson, 'collab')
+    await this.setState({list: confirmCollaboratorsJson.data.list})
+    // await console.log(confirmCollaboratorsJson, 'collab')
   }
 
 
