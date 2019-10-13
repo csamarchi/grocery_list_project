@@ -15,12 +15,14 @@ class App extends Component {
           <Switch>
              <Route exact path="/login" component={Login} />
              <Route
+                exact
                 path='/logout'
                 render={(props) => <Logout {...props} />}
               />
              <Route exact path="/register" component={Register} />
              {/* <Route exact path="/" component={LandingPage} /> */}
              <Route
+                exact
                 path='/'
                 render={(props) => <LandingPage {...props} />}
               />
