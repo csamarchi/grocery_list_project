@@ -44,8 +44,10 @@ class Login extends Component {
 
 
   render() {
+    let backgroundHeight = window.innerHeight;
+    
     return(
-      <div className='background'>
+      <div style={{ backgroundColor: '#ebecf0', height: backgroundHeight }}>
         <NavBar />
           <div className='wrapper'>
             <div className='loginForm'>

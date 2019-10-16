@@ -29,8 +29,10 @@ class ShowPage extends Component {
 
   render() {
     //console.log(this.props.match.url, 'CHEKCIT');
+    let backgroundHeight = window.innerHeight;
+
     return(
-      <div className='background'>
+      <div style={{height: backgroundHeight}}>
         <NavBar />
         {this.state.dataLoaded ? <List data={this.state.list} /> : null}
       </div>

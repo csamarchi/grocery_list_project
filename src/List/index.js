@@ -143,13 +143,13 @@ class List extends Component {
       const searchCollaborators = await fetch('http://localhost:9000/collab', {
         method: 'POST',
         credentials: 'include',
-        body: JSON.stringify({name: this.state.name}),
+        body: JSON.stringify({name: this.state.username}),
         headers: {
           'Content-Type': 'application/json'
         }
       })
       const searchCollaboratorsJson = await searchCollaborators.json()
-      // await console.log(searchCollaboratorsJson, 'collab')
+      console.log(searchCollaboratorsJson, 'collab')
 
       await this.setState({
         collabs: searchCollaboratorsJson.data,
@@ -169,6 +169,7 @@ class List extends Component {
       body: JSON.stringify({
         username: username,
         listID: this.state._id,
+        userID: this.state.collabs[0]._id
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -182,6 +183,7 @@ class List extends Component {
 
   render() {
     //console.log(this.state, '456789');
+    let backgroundHeight = window.innerHeight;
     const data = this.state.list.categories;
     let categoryList = data.map((item, i) =>
       <Categories
@@ -201,7 +203,7 @@ class List extends Component {
 )
 
     return(
-      <div className='background' style={{background: this.state.background}}>
+      <div style={{background: this.state.background}}>
         <div className='title'>
           <h1 className='listName'> {this.state.list.name} </h1>
           <Edit className='edit' onClick={this.toggleEdit} />
@@ -238,7 +240,7 @@ class List extends Component {
             getList={this.getList}
             updateState={this.updateState}
           />
-          <div className='categoryWrapper' style={{background: this.state.background}}>
+          <div className='categoryWrapper' style={{background: this.state.background, height: backgroundHeight}}>
             {categoryList}
           </div>
       </div>

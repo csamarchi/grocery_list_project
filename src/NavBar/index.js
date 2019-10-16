@@ -17,7 +17,7 @@ export default class Example extends React.Component {
     super(props);
     this.state = {
       dropdownOpen: false,
-      usernames: props.username
+      // navUsername: props.username
     };
 
     this.toggle = this.toggle.bind(this);
@@ -25,7 +25,7 @@ export default class Example extends React.Component {
 
   logout = async () => {
     let logoutSession = await fetch('http://localhost:9000/auth/logout', {
-      credentials: 'include', 
+      credentials: 'include',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ export default class Example extends React.Component {
                 }}
                 caret
               >
-                {this.props.username}
+                {this.props.navUsername}
               </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem header><Link to='/logout'>Logout</Link></DropdownItem>

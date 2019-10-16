@@ -26,6 +26,8 @@ class DisplayLists extends Component {
 
 
   render() {
+    console.log(this.props.list);
+
     const showList = this.props.lists.map((item, i) => {
       //console.log(this.props.lists);
       return (
@@ -55,7 +57,9 @@ class DisplayLists extends Component {
           <button
             className='deleteListButton'
             itemID={item._id}
-            onClick={e => this.handleClick(e, item._id)}>
+            onClick={e => this.handleClick(e, item._id)}
+            disabled
+            >
               Delete List
           </button>
         </div>

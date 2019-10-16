@@ -60,12 +60,12 @@ class LandingPage extends Component {
 
 
   render() {
-    // console.log(this.props, 'props')
-    // this.props.history.push('/create')
+    console.log(this.state, 'state')
+    let backgroundHeight = window.innerHeight;
 
     return(
-      <div style={{ backgroundColor: '#ebecf0', height: '900px' }}>
-        <NavBar username={this.state.username} />
+      <div style={{ backgroundColor: '#ebecf0', height: backgroundHeight }}>
+        <NavBar navUsername={this.state.username} />
         <DisplayLists lists={this.state.lists} collabs={this.state.collabLists} />
       </div>
     )

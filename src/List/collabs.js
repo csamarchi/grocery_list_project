@@ -39,7 +39,7 @@ class Collabs extends Component {
               <Input
                 onChange={this.props.handleChange}
                 id="input-with-icon-adornment"
-                name='name'
+                name='username'
                 startAdornment={
                   <InputAdornment position="start">
                     <AccountCircle />
