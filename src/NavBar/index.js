@@ -19,7 +19,6 @@ export default class Example extends React.Component {
       dropdownOpen: false,
       // navUsername: props.username
     };
-
     this.toggle = this.toggle.bind(this);
   }
 
@@ -33,9 +32,7 @@ export default class Example extends React.Component {
     });
 
     let logoutSessionJson = await logoutSession.json();
-
     await console.log(logoutSessionJson);
-
     // await this.props.history.push('/');
   }
 
@@ -50,29 +47,38 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar style={{height: '40px'}}  color="dark" light expand="md">
-          <NavbarBrand style={{ color: 'white' }} href="/">grocery list</NavbarBrand>
+          <NavbarBrand>
+            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+            grocery list
+            </Link>
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink
-                  href="/create"
-                  style={{
-                    fontSize: '1.5em',
-                    color: 'white'
-                  }}
-                  >
-                  +
+                <NavLink>
+                  <Link
+                    to= "/create"
+                    style={{
+                      fontSize: '1.5em',
+                      color: 'white',
+                      textDecoration: 'none'
+                    }}
+                    >
+                    +
+                  </Link>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink
-                  href="/"
-                  style={{
-                    fontSize: '1em',
-                    marginTop: '8px',
-                    color: 'white',
-                  }}>
-                  Your Lists
+                <NavLink style={{ marginTop: '8px'}}>
+                  <Link
+                    to= "/"
+                    style={{
+                      fontSize: '1em',
+                      color: 'white',
+                      textDecoration: 'none'
+                    }}>
+                    Your Lists
+                  </Link>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -82,6 +88,8 @@ export default class Example extends React.Component {
                   fontSize: '1em',
                   marginTop: '8px',
                   color: 'white',
+                  backgroundColor: 'transparent',
+                  borderColor: 'transparent',
                 }}
                 caret
               >

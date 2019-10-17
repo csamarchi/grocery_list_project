@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import NavBar from '../NavBar';
 import './style.css';
 import List from '../List';
 

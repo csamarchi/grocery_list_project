@@ -25,25 +25,15 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
     });
-
     const listParsedJSON = await list.json();
       return listParsedJSON
   }
 
   componentDidMount() {
     this.getList().then((list) => {
-      //console.log(list)
-      // If the response says log in required
-      if (list.data === 'Log in required') {
-        // push them to the login page
-        this.props.history.push('/login');
-      } else {
-        this.setState({
-          username: list.data.username
-        })
-      }
-    }).catch((err) => {
-      console.log(err);
+      this.setState({
+        username: list.data.username
+      })
     })
   }
 

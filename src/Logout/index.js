@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 
-
 class Logout extends Component {
-    
+
     state = {};
-      
+
     logoutNow = async () => {
-    
+
         let logoutSession = await fetch('http://localhost:9000/auth/logout', {
-            credentials: 'include', 
+            credentials: 'include',
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
