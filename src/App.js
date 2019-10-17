@@ -7,11 +7,50 @@ import Register from './Register';
 import LandingPage from './LandingPage';
 import CreateList from './CreateList';
 import ShowPage from './ShowPage';
+import NavBar from './NavBar';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      username: ''
+    }
+  }
+
+  getList = async () => {
+    const list = await fetch('http://localhost:9000/findLists', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const listParsedJSON = await list.json();
+      return listParsedJSON
+  }
+
+  componentDidMount() {
+    this.getList().then((list) => {
+      //console.log(list)
+      // If the response says log in required
+      if (list.data === 'Log in required') {
+        // push them to the login page
+        this.props.history.push('/login');
+      } else {
+        this.setState({
+          username: list.data.username
+        })
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   render() {
     return (
       <div>
+        <NavBar navUsername={this.state.username} />
           <Switch>
              <Route exact path="/login" component={Login} />
              <Route

@@ -203,7 +203,7 @@ class List extends Component {
 )
 
     return(
-      <div style={{background: this.state.background}}>
+      <div style={{background: this.state.background, height: backgroundHeight}}>
         <div className='title'>
           <h1 className='listName'> {this.state.list.name} </h1>
           <Edit className='edit' onClick={this.toggleEdit} />
@@ -240,7 +240,7 @@ class List extends Component {
             getList={this.getList}
             updateState={this.updateState}
           />
-          <div className='categoryWrapper' style={{background: this.state.background, height: backgroundHeight}}>
+          <div className='categoryWrapper' style={{background: this.state.background}}>
             {categoryList}
           </div>
       </div>

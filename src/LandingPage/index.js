@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import NavBar from '../NavBar';
 import DisplayLists from '../DisplayLists';
 
 class LandingPage extends Component {
@@ -65,8 +64,7 @@ class LandingPage extends Component {
 
     return(
       <div style={{ backgroundColor: '#ebecf0', height: backgroundHeight }}>
-        <NavBar navUsername={this.state.username} />
-        <DisplayLists lists={this.state.lists} collabs={this.state.collabLists} />
+        <DisplayLists navUsername={this.state.username} lists={this.state.lists} collabs={this.state.collabLists} />
       </div>
     )
   }

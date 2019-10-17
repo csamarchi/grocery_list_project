@@ -46,7 +46,7 @@ export default class Example extends React.Component {
   }
 
   render() {
-    // console.log(this.props, 'props')
+    //console.log(this.state, 'nav bar')
     return (
       <div>
         <Navbar style={{height: '40px'}}  color="dark" light expand="md">

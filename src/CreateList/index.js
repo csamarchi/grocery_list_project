@@ -35,15 +35,9 @@ class CreateList extends Component {
       const parsedResponse = await addedList.json();
       // console.log(parsedResponse, 'this is  our parsed data at login');
       let link = await '/'.concat(parsedResponse.data._id);
-      await console.log(link, 'LINKINK')
 
       await console.log(parsedResponse, 'PARSED RESPONSE')
       await this.props.history.push(link)
-      // console.log(this.props.history)
-      // console.log()
-
-
-
     } catch (err) {
       console.log(err);
       console.log('error');
@@ -52,10 +46,11 @@ class CreateList extends Component {
 
 
   render() {
+    console.log(this.state, 'create list ');
+    let backgroundHeight = window.innerHeight;
 
     return(
-      <div className='background'>
-        <NavBar />
+      <div className='background' style={{height: backgroundHeight}}>
         {this.state.list ? <List data={this.state.createdPostId} name={this.state.name} /> : null}
           <div className='wrapper'>
             <div className='createForm'>
