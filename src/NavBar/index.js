@@ -47,46 +47,42 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar style={{height: '40px'}}  color="dark" light expand="md">
-          <NavbarBrand>
-            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+            <Link to="/" style={{ color: 'white', textDecoration: 'none', fontSize: '1.5em' }}>
             grocery list
             </Link>
-          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink>
                   <Link
                     to= "/create"
                     style={{
                       fontSize: '1.5em',
                       color: 'white',
-                      textDecoration: 'none'
+                      textDecoration: 'none',
+                      paddingLeft: '10px'
                     }}
                     >
                     +
                   </Link>
-                </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink style={{ marginTop: '8px'}}>
+              <NavItem style={{ marginTop: '8px'}}>
                   <Link
                     to= "/"
                     style={{
                       fontSize: '1em',
                       color: 'white',
-                      textDecoration: 'none'
+                      textDecoration: 'none',
+                      paddingLeft: '16px',
+                      paddRight: '4px'
                     }}>
                     Your Lists
                   </Link>
-                </NavLink>
               </NavItem>
-              <NavItem>
+            <NavItem>
               <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle
                 style={{
                   fontSize: '1em',
-                  marginTop: '8px',
                   color: 'white',
                   backgroundColor: 'transparent',
                   borderColor: 'transparent',
@@ -96,7 +92,7 @@ export default class Example extends React.Component {
                 {this.props.navUsername}
               </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem header><Link to='/logout'>Logout</Link></DropdownItem>
+                  <DropdownItem header tag={Link} to='/logout'>Logout</DropdownItem>
                 </DropdownMenu>
                 </Dropdown>
               </NavItem>

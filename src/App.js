@@ -13,7 +13,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      username: ''
+      username: '',
     }
   }
 
@@ -32,12 +32,13 @@ class App extends Component {
   componentDidMount() {
     this.getList().then((list) => {
       this.setState({
-        username: list.data.username
+        username: list.data.username,
       })
     })
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <NavBar navUsername={this.state.username} />
