@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <NavBar navUsername={this.state.username} />

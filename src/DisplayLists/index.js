@@ -72,6 +72,12 @@ class DisplayLists extends Component {
         <div className='gridList'>
           {showList}
           {showCollabList}
+          <Link to='/create' style={{textDecoration: 'none'}}>
+          <div className='addDiv'>
+            <h1 style={{fontSize: '2em', marginTop: '6px'}}><b> Add a List</b></h1>
+            <h1 style={{fontSize: '2em'}}> + </h1>
+          </div>
+          </Link>
         </div>
       </div>
     )

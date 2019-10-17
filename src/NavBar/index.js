@@ -92,7 +92,7 @@ export default class Example extends React.Component {
                 {this.props.navUsername}
               </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem header tag={Link} to='/logout'>Logout</DropdownItem>
+                  <DropdownItem header ><Link to='/logout'>Logout</Link></DropdownItem>
                 </DropdownMenu>
                 </Dropdown>
               </NavItem>

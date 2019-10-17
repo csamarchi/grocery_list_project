@@ -45,7 +45,7 @@ class CreateList extends Component {
 
 
   render() {
-    console.log(this.state, 'create list ');
+    // console.log(this.state, 'create list ');
     let backgroundHeight = window.innerHeight;
 
     return(
