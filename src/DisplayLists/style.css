@@ -8,7 +8,7 @@
 
 .listDiv {
   padding: 30px;
-  border: 1px solid;
+  border: 1px solid none;
   margin: 5px;
   background-color: #f8f9fa;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -30,4 +30,23 @@ h4 {
   cursor: pointer;
   background-color: #a6abad;
   border: #a6abad;
+}
+
+.addDiv {
+  padding: 30px;
+  border: 1px solid none;
+  margin: 5px;
+  background-color: #c6e4f7;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  font-family: "Courier New", Courier, monospace;
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+  opacity: 0.5;
+}
+
+.addDiv:hover {
+  background-color: #f2f7fa;
+  cursor: pointer;
+  opacity: 0.2px;
 }

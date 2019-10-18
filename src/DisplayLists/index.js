@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import { Tooltip } from '@material-ui/core';
 
 
 class DisplayLists extends Component {
@@ -47,21 +48,21 @@ class DisplayLists extends Component {
     })
 
     const showCollabList = this.props.collabs.map((item, i) => {
-      //console.log(this.props.lists);
+      console.log(this.props.lists);
       return (
         <div key={item._id} className='listDiv' style={{ backgroundColor: `pink` }}>
           <h4> {item.name} </h4>
           <Link to ={'/' + item._id}>
-          <button className='deleteListButton'>View</button>
+            <button className='deleteListButton'>View</button>
           </Link>
-          <button
-            className='deleteListButton'
-            itemID={item._id}
-            onClick={e => this.handleClick(e, item._id)}
-            disabled
-            >
-              Delete List
-          </button>
+            <button
+              className='deleteListButton'
+              itemID={item._id}
+              onClick={e => this.handleClick(e, item._id)}
+              disabled
+              >
+                Delete List
+            </button>
         </div>
       )
     })
@@ -72,6 +73,12 @@ class DisplayLists extends Component {
         <div className='gridList'>
           {showList}
           {showCollabList}
+          <Link to='/create' style={{textDecoration: 'none'}}>
+          <div className='addDiv'>
+            <h1 style={{fontSize: '2em', marginTop: '6px'}}><b> Add a List</b></h1>
+            <h1 style={{fontSize: '3em'}}> + </h1>
+          </div>
+          </Link>
         </div>
       </div>
     )
