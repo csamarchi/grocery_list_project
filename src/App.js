@@ -16,9 +16,10 @@ class App extends Component {
       username: '',
     }
   }
+  //http://10.128.0.2:/8080
 
   getList = async () => {
-    const list = await fetch('http://localhost:9000/findLists', {
+    const list = await fetch('http://35.193.222.119:9000/findLists', {
       method: 'GET',
       credentials: 'include',
       headers: {

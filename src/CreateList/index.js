@@ -21,7 +21,7 @@ class CreateList extends Component {
     // console.log(this.state, 'worked');
 
     try {
-      const addedList = await fetch('http://localhost:9000/create', {
+      const addedList = await fetch('http://35.193.222.119:9000/create', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(this.state),

@@ -34,7 +34,7 @@ class List extends Component {
 
   getList = async () => {
     try {
-      const getItem = await fetch('http://localhost:9000/' + this.state._id, {
+      const getItem = await fetch('http://35.193.222.119:9000/' + this.state._id, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -68,7 +68,7 @@ class List extends Component {
                 category: name,
                 listID: this.state._id
               };
-    const deleteCategory = await fetch('http://localhost:9000/deleteCategory', {
+    const deleteCategory = await fetch('http://35.193.222.119:9000/deleteCategory', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(data),
@@ -94,7 +94,7 @@ class List extends Component {
       name: this.state.name,
       listID: this.state._id
     };
-    const editList = await fetch('http://localhost:9000/edit', {
+    const editList = await fetch('http://35.193.222.119:9000/edit', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(data),
@@ -126,7 +126,7 @@ class List extends Component {
       listID: this.state._id
     };
 
-    const updateColor = await fetch('http://localhost:9000/listcolor', {
+    const updateColor = await fetch('http://35.193.222.119:9000/listcolor', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(data),
@@ -140,7 +140,7 @@ class List extends Component {
     e.preventDefault();
     console.log(this.state)
     // try {
-      const searchCollaborators = await fetch('http://localhost:9000/collab', {
+      const searchCollaborators = await fetch('http://35.193.222.119:9000/collab', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({name: this.state.username}),
@@ -163,7 +163,7 @@ class List extends Component {
 
   handleConfirmCollab = async (e, username) => {
     e.preventDefault();
-    const confirmCollaborators = await fetch('http://localhost:9000/confirmCollab', {
+    const confirmCollaborators = await fetch('http://35.193.222.119:9000/confirmCollab', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({

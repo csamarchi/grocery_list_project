@@ -23,7 +23,7 @@ export default class Example extends React.Component {
   }
 
   logout = async () => {
-    let logoutSession = await fetch('http://localhost:9000/auth/logout', {
+    let logoutSession = await fetch('http://35.193.222.119:9000/auth/logout', {
       credentials: 'include',
       method: 'GET',
       headers: {
@@ -92,7 +92,7 @@ export default class Example extends React.Component {
                 {this.props.navUsername}
               </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem header tag={Link} to='/logout'>Logout</DropdownItem>
+                 <DropdownItem header><Link to='/logout'>Logout</Link></DropdownItem>  
                 </DropdownMenu>
                 </Dropdown>
               </NavItem>
