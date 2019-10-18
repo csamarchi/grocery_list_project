@@ -43,7 +43,7 @@ export default class Example extends React.Component {
   }
 
   render() {
-    //console.log(this.state, 'nav bar')
+    console.log(this.props, 'nav bar')
     return (
       <div>
         <Navbar style={{height: '40px'}}  color="dark" light expand="md">
@@ -92,7 +92,7 @@ export default class Example extends React.Component {
                 {this.props.navUsername}
               </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem header ><Link to='/logout'>Logout</Link></DropdownItem>
+                  <DropdownItem header><Link to='/logout'>Logout</Link></DropdownItem>
                 </DropdownMenu>
                 </Dropdown>
               </NavItem>
