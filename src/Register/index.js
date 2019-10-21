@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import NavBar from '../NavBar';
 import { Form } from 'reactstrap';
 import './style.css';
 
@@ -38,7 +37,6 @@ handleChange = (e) => {
   render() {
     return(
       <div>
-        <NavBar />
         <div className='wrapper'>
           <div className='loginForm'>
             <h1 className='register'> Register </h1>
