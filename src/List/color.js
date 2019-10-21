@@ -13,6 +13,7 @@ class ColorPicker extends Component {
   }
 
   handleClick = () => {
+    console.log('hello')
   this.setState({ displayColorPicker: !this.state.displayColorPicker })
 };
 
@@ -27,7 +28,6 @@ class ColorPicker extends Component {
         { this.state.displayColorPicker ?
           <div className='popover'>
             <CirclePicker onChangeComplete={ this.props.onChange } />
-            <button className='saveColor' onClick={this.props.handleUpdate}><div onClick={() => this.handleClose()}>Save</div> </button>
             <Close onClick={this.handleClose} className='cancel'/>
           </div> :
           <div className='swatch' onClick={ this.handleClick }>

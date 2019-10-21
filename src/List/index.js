@@ -115,18 +115,16 @@ class List extends Component {
     this.setState({ isEditing: !this.state.isEditing })
   }
 
-  handleColorChange = (color) => {
+  handleColorChange = async (color) => {
+    console.log('hello')
     this.setState({ background: color.hex });
-  };
 
-
-  handleUpdate = async (color) => {
     const data = {
       color: this.state.background,
       listID: this.state._id
     };
 
-    const updateColor = await fetch('http://localhost:9000/listcolor', {
+    await fetch('http://localhost:9000/listcolor', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(data),
@@ -134,7 +132,8 @@ class List extends Component {
         'Content-Type': 'application/json'
       }
     })
-  }
+  };
+
 
   searchCollaborators = async (e) => {
     e.preventDefault();
@@ -229,7 +228,6 @@ class List extends Component {
             collabs={this.state.collabs}
           />
           <ColorPicker
-            handleUpdate={this.handleUpdate}
             onChange={this.handleColorChange}
           />
         </div>
