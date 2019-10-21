@@ -22,9 +22,11 @@ class Register extends Component {
       }
   });
   const parsedResponse = await registerResponse.json();
-    if(parsedResponse.data = 'register successful'){
+  console.log(parsedResponse)
+    if(parsedResponse.data.result === 'registration successful'){
       // this.props.history.push('/profile');
       //window.location.assign('http://localhost:9000')
+      this.props.loginUsernameChange(parsedResponse.data.username)
       this.props.history.push('/')
   }
 }

@@ -18,30 +18,15 @@ class App extends Component {
   }
   //http://10.128.0.2:/8080
 
-  getList = async () => {
-    const list = await fetch('http://localhost:9000/findLists', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const listParsedJSON = await list.json();
-      return listParsedJSON
-  }
-
   logoutUsernameChange = () => {
     this.setState({
       username: ''
     })
   }
 
-  componentDidMount() {
-    this.getList().then((list) => {
-      console.log('HELLOOO')
-      this.setState({
-        username: list.data.username,
-      })
+  loginUsernameChange = (username) => {
+    this.setState({
+      username: username
     })
   }
 
@@ -51,13 +36,21 @@ class App extends Component {
       <div>
         <NavBar navUsername={this.state.username} logoutUsernameChange={this.logoutUsernameChange} />
           <Switch>
-             <Route exact path="/login" component={Login} />
+             <Route
+                exact
+                path='/login'
+                render={(props) => <Login loginUsernameChange={this.loginUsernameChange} {...props} />}
+              />
              <Route
                 exact
                 path='/logout'
                 render={(props) => <Logout {...props} />}
               />
-             <Route exact path="/register" component={Register} />
+             <Route
+                exact
+                path='/register'
+                render={(props) => <Register loginUsernameChange={this.loginUsernameChange} {...props} />}
+              />
              {/* <Route exact path="/" component={LandingPage} /> */}
              <Route
                 exact

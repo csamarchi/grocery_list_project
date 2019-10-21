@@ -27,15 +27,14 @@ class Login extends Component {
       const parsedResponse = await loginResponse.json();
       console.log(parsedResponse, 'this is our parsed data at login');
 
-        if(parsedResponse.data === 'login successful') {
+        if(parsedResponse.data.result === 'login successful') {
+          this.props.loginUsernameChange(parsedResponse.data.username)
           this.props.history.push('/');
 
-        } else if(parsedResponse.data === 'login unsuccessful'){
-          alert('Password Incorrect')
-        } else if(parsedResponse.data === 'login unsuccessful'){
-          alert('Username Not Found. Please Register')
-        }
+        } else if(parsedResponse.data.result === 'login unsuccessful'){
+          alert('Incorrect')
       }
+    }
 
       handleChange = (e) => {
         this.setState({[e.target.name]:e.target.value});

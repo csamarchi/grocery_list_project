@@ -17,6 +17,7 @@ export default class Example extends React.Component {
     super(props);
     this.state = {
       dropdownOpen: false,
+      userLoggedIn: ''
       // navUsername: props.username
     };
     this.toggle = this.toggle.bind(this);
