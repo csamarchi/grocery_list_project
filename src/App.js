@@ -30,8 +30,15 @@ class App extends Component {
       return listParsedJSON
   }
 
+  logoutUsernameChange = () => {
+    this.setState({
+      username: ''
+    })
+  }
+
   componentDidMount() {
     this.getList().then((list) => {
+      console.log('HELLOOO')
       this.setState({
         username: list.data.username,
       })
@@ -42,7 +49,7 @@ class App extends Component {
     // console.log(this.state);
     return (
       <div>
-        <NavBar navUsername={this.state.username} />
+        <NavBar navUsername={this.state.username} logoutUsernameChange={this.logoutUsernameChange} />
           <Switch>
              <Route exact path="/login" component={Login} />
              <Route

@@ -22,19 +22,6 @@ export default class Example extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
-  logout = async () => {
-    let logoutSession = await fetch('http://localhost:9000/auth/logout', {
-      credentials: 'include',
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    let logoutSessionJson = await logoutSession.json();
-    await console.log(logoutSessionJson);
-    // await this.props.history.push('/');
-  }
 
   toggle() {
     this.setState({
@@ -92,7 +79,7 @@ export default class Example extends React.Component {
                 {this.props.navUsername}
               </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem header><Link to='/logout'>Logout</Link></DropdownItem>
+                  <DropdownItem header><Link onClick={this.props.logoutUsernameChange} to='/logout'>Logout</Link></DropdownItem>
                 </DropdownMenu>
                 </Dropdown>
               </NavItem>
