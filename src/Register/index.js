@@ -14,7 +14,7 @@ class Register extends Component {
 
   handleSubmit = async (e) => {
   e.preventDefault();
-  const registerResponse = await fetch('http://35.193.222.119:9000/auth/register', {
+  const registerResponse = await fetch('http://localhost:9000/auth/register', {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(this.state),
@@ -25,7 +25,7 @@ class Register extends Component {
   const parsedResponse = await registerResponse.json();
     if(parsedResponse.data = 'register successful'){
       // this.props.history.push('/profile');
-      //window.location.assign('http://localhost:3000')
+      //window.location.assign('http://localhost:9000')
       this.props.history.push('/')
   }
 }

@@ -14,7 +14,7 @@ class DisplayLists extends Component {
   }
 
   handleClick = async (e, itemID ) => {
-    const deleteList = await fetch('http://35.193.222.119:9000/' + itemID, {
+    const deleteList = await fetch('http://localhost:9000/' + itemID, {
       method: 'DELETE',
       credentials: 'include',
       headers: {

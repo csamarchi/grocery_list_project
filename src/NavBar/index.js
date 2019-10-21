@@ -23,7 +23,7 @@ export default class Example extends React.Component {
   }
 
   logout = async () => {
-    let logoutSession = await fetch('http://35.193.222.119:9000/auth/logout', {
+    let logoutSession = await fetch('http://localhost:9000/auth/logout', {
       credentials: 'include',
       method: 'GET',
       headers: {
@@ -43,7 +43,7 @@ export default class Example extends React.Component {
   }
 
   render() {
-    console.log(this.props, 'nav bar')
+    // console.log(this.props, 'nav bar')
     return (
       <div>
         <Navbar style={{height: '40px'}}  color="dark" light expand="md">

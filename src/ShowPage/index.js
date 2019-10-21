@@ -11,7 +11,7 @@ class ShowPage extends Component {
   }
 
   getlist = async () => {
-    const list = await fetch('http://35.193.222.119:9000' + this.props.match.url );
+    const list = await fetch('http://localhost:9000' + this.props.match.url );
 
     const listParsedJSON = await list.json();
       return listParsedJSON
@@ -27,7 +27,7 @@ class ShowPage extends Component {
 
 
   render() {
-    console.log(this.state, 'Show Page');
+    // console.log(this.state, 'Show Page');
     let backgroundHeight = window.innerHeight;
 
     return(
