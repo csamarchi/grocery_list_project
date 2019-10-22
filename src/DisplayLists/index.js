@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import { Tooltip } from '@material-ui/core';
+import CreateModal from '../CreateModal';
 
 
 class DisplayLists extends Component {
@@ -73,12 +73,13 @@ class DisplayLists extends Component {
         <div className='gridList'>
           {showList}
           {showCollabList}
-          <Link to='/create' style={{textDecoration: 'none'}}>
-          <div className='addDiv'>
+          {/* <Link to='/create' style={{textDecoration: 'none'}}> */}
+          <CreateModal />
+          {/* <div className='addDiv'>
             <h1 style={{fontSize: '2em', marginTop: '6px'}}><b> Add a List</b></h1>
             <h1 style={{fontSize: '3em'}}> + </h1>
-          </div>
-          </Link>
+          </div> */}
+          {/* </Link> */}
         </div>
       </div>
     )
