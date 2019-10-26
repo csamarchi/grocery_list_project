@@ -7,12 +7,15 @@ import './style.css';
 const ModalExample = (props) => {
   const {
     buttonLabel,
-    className
+    className,
+    handleChange,
+    handleSubmit
   } = props;
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
 
   return (
 
@@ -22,13 +25,16 @@ const ModalExample = (props) => {
             <h1 style={{fontSize: '2em', marginTop: '6px'}}><b> Add a List</b></h1>
             <h1 style={{fontSize: '3em'}}> + </h1>
           </div>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <Modal isOpen={modal} toggle={toggle} className={className} >
+        <ModalHeader toggle={toggle}>Create a List</ModalHeader>
+        <ModalBody className='createForm'>
+          <form onSubmit={handleSubmit}>
+              <h1 className='nameListText'>Name your list: </h1>
+              <input type='text' name='name' placeholder='type something..' onChange={handleChange}/>
+              <input className='createButton'type='Submit' value='Create' />
+          </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>

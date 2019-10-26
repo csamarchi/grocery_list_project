@@ -46,6 +46,18 @@ class LandingPage extends Component {
     })
   }
 
+  updateState = (data) => {
+    let lists = this.state.lists
+    lists.map((item, i) => {
+    if (item._id === data._id) {
+      lists.splice(i, 1)
+    }
+  })
+    this.setState({
+      lists: lists
+    })
+  }
+
 //Delete Function
   deleteList = async (id) => {
       //console.log(id, ' this is id');
@@ -65,7 +77,13 @@ class LandingPage extends Component {
 
     return(
       <div style={{ backgroundColor: '#ebecf0', height: backgroundHeight }}>
-        <DisplayLists navUsername={this.state.username} lists={this.state.lists} collabs={this.state.collabLists} />
+        <DisplayLists
+          navUsername={this.state.username}
+          lists={this.state.lists}
+          collabs={this.state.collabLists}
+          updateState={this.updateState}
+          getList={this.getList}
+        />
       </div>
     )
   }

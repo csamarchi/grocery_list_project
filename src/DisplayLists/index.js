@@ -9,7 +9,7 @@ class DisplayLists extends Component {
   constructor() {
     super();
     this.state = {
-      a: 'a'
+      name: '',
     }
   }
 
@@ -22,7 +22,38 @@ class DisplayLists extends Component {
       }
     });
     const responseList = await deleteList.json();
-    this.props.history.push('/create');
+    await this.props.updateState(responseList.data);
+  }
+
+  handleChange = (e) => {
+    this.setState({[e.currentTarget.name]: e.currentTarget.value});
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(this.state, 'worked');
+
+    try {
+      const addedList = await fetch('http://localhost:9000/create', {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(this.state),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      // console.log(addedList)
+
+      const parsedResponse = await addedList.json();
+      // console.log(parsedResponse, 'this is  our parsed data at login');
+      let link = await '/'.concat(parsedResponse.data._id);
+
+      await console.log(parsedResponse, 'PARSED RESPONSE')
+      await this.props.history.push(link)
+    } catch (err) {
+      console.log(err);
+      console.log('error');
+    }
   }
 
 
@@ -48,7 +79,7 @@ class DisplayLists extends Component {
     })
 
     const showCollabList = this.props.collabs.map((item, i) => {
-      console.log(this.props.lists);
+      //console.log(this.props.lists);
       return (
         <div key={item._id} className='listDiv' style={{ backgroundColor: `pink` }}>
           <h4> {item.name} </h4>
@@ -74,7 +105,10 @@ class DisplayLists extends Component {
           {showList}
           {showCollabList}
           {/* <Link to='/create' style={{textDecoration: 'none'}}> */}
-          <CreateModal />
+          <CreateModal
+            handleChange={this.handleChange}
+            handleSubmit ={this.handleSubmit}
+          />
           {/* <div className='addDiv'>
             <h1 style={{fontSize: '2em', marginTop: '6px'}}><b> Add a List</b></h1>
             <h1 style={{fontSize: '3em'}}> + </h1>

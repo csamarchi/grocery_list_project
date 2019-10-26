@@ -11,6 +11,8 @@ import {
   DropdownToggle,
   NavItem,
   NavLink } from 'reactstrap';
+import CreateModal from '../CreateModal';
+
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -40,19 +42,6 @@ export default class Example extends React.Component {
             </Link>
           <NavbarToggler onClick={this.toggle} />
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                  <Link
-                    to= "/create"
-                    style={{
-                      fontSize: '1.5em',
-                      color: 'white',
-                      textDecoration: 'none',
-                      paddingLeft: '10px'
-                    }}
-                    >
-                    +
-                  </Link>
-              </NavItem>
               <NavItem style={{ marginTop: '8px'}}>
                   <Link
                     to= "/"
