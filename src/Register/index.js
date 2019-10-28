@@ -13,7 +13,7 @@ class Register extends Component {
 
   handleSubmit = async (e) => {
   e.preventDefault();
-  const registerResponse = await fetch('http://localhost:9000/auth/register', {
+  const registerResponse = await fetch('http://35.193.222.119:9000/auth/register', {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(this.state),
@@ -25,7 +25,7 @@ class Register extends Component {
   console.log(parsedResponse)
     if(parsedResponse.data.result === 'registration successful'){
       // this.props.history.push('/profile');
-      //window.location.assign('http://localhost:9000')
+      //window.location.assign('http://35.193.222.119:9000')
       this.props.loginUsernameChange(parsedResponse.data.username)
       this.props.history.push('/')
   }

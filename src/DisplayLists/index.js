@@ -14,7 +14,7 @@ class DisplayLists extends Component {
   }
 
   handleClick = async (e, itemID ) => {
-    const deleteList = await fetch('http://localhost:9000/' + itemID, {
+    const deleteList = await fetch('http://35.193.222.119:9000/' + itemID, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
@@ -34,7 +34,7 @@ class DisplayLists extends Component {
     // console.log(this.state, 'worked');
 
     try {
-      const addedList = await fetch('http://localhost:9000/create', {
+      const addedList = await fetch('http://35.193.222.119:9000/create', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(this.state),

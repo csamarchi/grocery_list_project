@@ -13,7 +13,7 @@ class LandingPage extends Component {
   }
 
   getList = async () => {
-    const list = await fetch('http://localhost:9000/findLists', {
+    const list = await fetch('http://35.193.222.119:9000/findLists', {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -61,7 +61,7 @@ class LandingPage extends Component {
 //Delete Function
   deleteList = async (id) => {
       //console.log(id, ' this is id');
-      const deleteListResponse = await fetch('http://localhost:9000/api/v1/list/' + id, {
+      const deleteListResponse = await fetch('http://35.193.222.119:9000/api/v1/list/' + id, {
           method: 'DELETE'
         });
       const deleteListParsed = await deleteListResponse.text();
