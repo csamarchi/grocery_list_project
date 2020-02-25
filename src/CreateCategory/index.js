@@ -22,7 +22,7 @@ class CreateList extends Component {
     e.preventDefault();
     //console.log(this.state, 'worked');
     try {
-      const addedCategory = await fetch('http://35.193.222.119:9000/addCategory', {
+      const addedCategory = await fetch('http://localhost:9000/addCategory', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(this.state),
