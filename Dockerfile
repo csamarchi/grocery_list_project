@@ -7,7 +7,9 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
-RUN npm install && npm update && npm install
+RUN npm install
+RUN npm update
+RUN npm install
 
 
 # Bundle app source
