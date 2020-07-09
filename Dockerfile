@@ -7,7 +7,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
-RUN sudo npm install
+RUN npm install
 RUN sudo npm update
 RUN sudo npm install
 
