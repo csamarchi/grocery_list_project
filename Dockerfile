@@ -8,8 +8,7 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 RUN npm install
-RUN sudo npm update
-RUN sudo npm install
+RUN npm audit fix
 
 
 # Bundle app source
