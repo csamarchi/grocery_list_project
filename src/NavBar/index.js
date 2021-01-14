@@ -3,15 +3,13 @@ import {Link} from "react-router-dom";
 import {
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  NavItem,
-  NavLink } from 'reactstrap';
-import CreateModal from '../CreateModal';
+  NavItem, } from 'reactstrap';
+// import CreateModal from '../CreateModal';
 
 
 export default class Example extends React.Component {

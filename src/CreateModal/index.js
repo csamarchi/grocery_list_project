@@ -6,7 +6,6 @@ import './style.css';
 
 const ModalExample = (props) => {
   const {
-    buttonLabel,
     className,
     handleChange,
     handleSubmit

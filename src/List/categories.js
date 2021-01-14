@@ -25,7 +25,7 @@ class Categories extends Component {
       categoryIndex: i
     }
     try {
-      const addItem = await fetch('http://35.19http://localhost:90003.222.119:9000/addItem', {
+      const addItem = await fetch('http://localhost:9000/addItem', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(reqData),
